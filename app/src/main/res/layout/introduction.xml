@@ -1,0 +1,70 @@
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".Introduction">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="@dimen/dialog_padding"
+            android:theme="@style/Theme.GadgetControlWidgets">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/introduction_overview"
+                android:justificationMode="inter_word"
+                android:layout_marginBottom="@dimen/dialog_padding"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/introduction_overview"
+                android:textAppearance="@style/Theme.GadgetControlWidgets.TextAppearance"/>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/introduction_usage_intro"
+                android:justificationMode="inter_word"
+                android:layout_marginBottom="@dimen/dialog_padding"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/introduction_usage_intro"
+                android:textAppearance="@style/Theme.GadgetControlWidgets.TextAppearance"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/introduction_usage_toggle"
+                android:layout_marginBottom="@dimen/dialog_padding"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:text="@string/introduction_usage_toggle"
+                android:clickable="true"
+                android:focusable="false"
+                app:icon="@drawable/ic_expand_more"
+                app:iconGravity="textStart"/>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/introduction_usage_steps"
+                android:justificationMode="inter_word"
+                android:layout_marginBottom="@dimen/dialog_padding"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="@dimen/dialog_padding"
+                android:textAppearance="@style/Theme.GadgetControlWidgets.TextAppearance"
+                android:visibility="gone"/>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/introduction_usage_extro"
+                android:justificationMode="inter_word"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/introduction_usage_extro"
+                android:textAppearance="@style/Theme.GadgetControlWidgets.TextAppearance"/>
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+    </androidx.core.widget.NestedScrollView>
+
+</layout>

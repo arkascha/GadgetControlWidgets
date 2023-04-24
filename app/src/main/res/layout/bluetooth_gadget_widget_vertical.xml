@@ -1,0 +1,10 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/bluetoothWidget_itemList_verticalContainer"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?android:attr/colorBackground"
+    android:orientation="vertical"
+    android:theme="@android:style/Theme.DeviceDefault.DayNight"
+    tools:context="org.rustygnome.gadgetcontrolwidgets.widget.bluetooth.Configuration" />

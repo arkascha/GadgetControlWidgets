@@ -1,0 +1,28 @@
+<resources>
+    <string name="app_name">Gadget Control Widgets</string>
+
+    <string name="configure">Configure</string>
+    <string name="add_widget">Add widget</string>
+    <string name="app_widget_description">Bluetooth Gadget Control</string>
+    <string name="bluetooth_configuration_currently_known_gadgets">Aktuell bekannte Bluetooth Gadgets</string>
+    <string name="permissions_activity_button_text_grant">Zulassen</string>
+    <string name="permission_activity_text_explanation">Dieses Widget benötigt Berechtigungen im Android-System. Die nachfolgend abgefragten Berechtigungen bitte erteilen:</string>
+    <string name="permissions_activity_welcome_message">Moin, viel Freude mit den Gadget Control Widgets!</string>
+    <string name="permissions_activity_denial_message">Ohne diese Berechtigungen können die Widgets nicht genutzt werden, da Android die notwendigen Zugriffe blockiert.</string>
+
+    <string name="introduction_overview">"Diese App bietet Widgets, die eine Vereinfachung bieten sollen um schnell auf Gadgets zugreifen zu können, die normalerweise tiefer in den Einstellungen erreichbar sind."</string>
+    <string name="introduction_usage_intro">"Diese Widgets können dem Homescreen ihres Geräts hinzugefügt werden."</string>
+    <string name="introduction_usage_toggle">"Anleitung"</string>
+    <string-array name="introduction_usage_steps">
+        <item>Berühren und halten einer freien Fläche auf dem Homescreen.</item>
+        <item>In dem sich öffnenden Kontext-Menü \"Widgets\" auswählen".</item>
+        <item>Aus der Liste der installierten Widgets die Gruppe \"Gadget Control Widgets\" auswählen.</item>
+        <item>Eines der dort angebotenen Layouts auswählen, einfach ausprobieren.</item>
+        <item>Auf das ausgewählte Widget zeigen und halten.</item>
+        <item>Das Widget auf einen noch freien Bereich auf dem Homescreen schieben.</item>
+        <item>Die erbetenen Berechtigungen für das Widget bestätigen.</item>
+        <item>Die genauen Einstellungen des Widgets konfigurieren.</item>
+    </string-array>
+    <string name="introduction_usage_extro">"Auf dem Homescreen platzierte Widgets können geändert werden durch draufzeigen und halten, anschließend kann die Größe nach Bedarf verändert werden. Zusätzlich können jederzeit erneut die Einstellungen des Widgets geöffnen werden. Zum Entfernen des Widgets draufzeigen und halten, anschließend oben auf die Fläche \"Entfernen\" schieben. "</string>
+
+</resources>

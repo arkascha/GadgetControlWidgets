@@ -1,0 +1,17 @@
+<resources>
+
+    <style name="Theme.GadgetControlWidgets" parent="Theme.MaterialComponents">
+        <item name="android:textAppearance">@style/Theme.GadgetControlWidgets.TextAppearance</item>
+        <item name="buttonStyle">@style/Theme.GadgetControlWidgets.Button</item>
+        <item name="android:buttonStyle">@style/Theme.GadgetControlWidgets.Button</item>
+    </style>
+
+    <style name="Theme.GadgetControlWidgets.TextAppearance" parent="TextAppearance.MaterialComponents.Body2">
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="Theme.GadgetControlWidgets.Button" parent="Widget.Material3.Button.TextButton">
+        <item name="android:backgroundTint">@color/design_default_color_secondary</item>
+    </style>
+
+</resources>
