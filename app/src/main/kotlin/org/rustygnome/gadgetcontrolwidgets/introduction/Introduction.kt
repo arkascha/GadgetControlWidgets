@@ -1,14 +1,18 @@
 package org.rustygnome.gadgetcontrolwidgets.introduction
 
 import android.os.Bundle
+import android.text.SpannableString
+import android.text.style.BulletSpan
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import org.rustygnome.gadgetcontrolwidgets.R
 import org.rustygnome.gadgetcontrolwidgets.databinding.IntroductionBinding
+
 
 class Introduction: Fragment() {
 
@@ -33,9 +37,16 @@ class Introduction: Fragment() {
 
     private fun initUsageSteps() {
         resources.getStringArray(R.array.introduction_usage_steps).also {
-            binding.introductionUsageSteps.text = buildString {
-                it.forEachIndexed { index, string ->
-                    append("${index+1}. $string\n")
+            it.forEachIndexed { index, step ->
+                with(binding.introductionUsageSteps as ViewGroup) {
+                    TextView(context).apply {
+                        text = SpannableString(step).apply {
+                            setSpan(BulletSpan(15), 0, step.length, 0)
+                        }
+                        setTextAppearance(R.style.Theme_GadgetControlWidgets_TextAppearance)
+                    }.also{
+                        addView(it)
+                    }
                 }
             }
         }

@@ -16,12 +16,10 @@
     <string-array name="introduction_usage_steps">
         <item>Berühren und halten einer freien Fläche auf dem Homescreen.</item>
         <item>In dem sich öffnenden Kontext-Menü \"Widgets\" auswählen".</item>
-        <item>Aus der Liste der installierten Widgets die Gruppe \"Gadget Control Widgets\" auswählen.</item>
-        <item>Eines der dort angebotenen Layouts auswählen, einfach ausprobieren.</item>
-        <item>Auf das ausgewählte Widget zeigen und halten.</item>
-        <item>Das Widget auf einen noch freien Bereich auf dem Homescreen schieben.</item>
-        <item>Die erbetenen Berechtigungen für das Widget bestätigen.</item>
-        <item>Die genauen Einstellungen des Widgets konfigurieren.</item>
+        <item>In der Liste der installierten Widgets die Gruppe \"Gadget Control Widgets\" öffnen.</item>
+        <item>Auf eines der dort angebotenen Widgets zeigen, halten und auf einen noch freien Bereich auf einem Homescreen schieben.</item>
+        <item>Die erforderlichen Berechtigungen für das Widget bestätigen.</item>
+        <item>Bei Bedarf die genauen Einstellungen des Widgets konfigurieren.</item>
     </string-array>
     <string name="introduction_usage_extro">"Auf dem Homescreen platzierte Widgets können geändert werden durch draufzeigen und halten, anschließend kann die Größe nach Bedarf verändert werden. Zusätzlich können jederzeit erneut die Einstellungen des Widgets geöffnen werden. Zum Entfernen des Widgets draufzeigen und halten, anschließend oben auf die Fläche \"Entfernen\" schieben. "</string>
 
