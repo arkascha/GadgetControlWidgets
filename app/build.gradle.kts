@@ -60,6 +60,7 @@ dependencies {
     implementation(libs.androidx.preference)
     implementation(libs.google.android.material)
     implementation(libs.kotlin.stdlib.jdk8)
+    implementation(libs.timber)
 
     testImplementation(libs.junit.jupiter)
     testImplementation(libs.assertj.core)

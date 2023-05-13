@@ -2,27 +2,50 @@ package org.rustygnome.gadgetcontrolwidgets.widget.bluetooth
 
 import android.appwidget.AppWidgetManager
 import android.appwidget.AppWidgetProvider
-import android.bluetooth.BluetoothManager
 import android.content.Context
-import android.content.Context.BLUETOOTH_SERVICE
-import android.util.Log
-import org.rustygnome.gadgetcontrolwidgets.ensureRequiredPermissions
+import org.rustygnome.gadgetcontrolwidgets.App
 import org.rustygnome.gadgetcontrolwidgets.deleteTitlePref
+import timber.log.Timber
 
-class Provider : AppWidgetProvider() {
+abstract class Provider : AppWidgetProvider() {
+
+    init {
+        Timber.d("> init()")
+    }
 
     override fun onUpdate(
         context: Context,
         appWidgetManager: AppWidgetManager,
         appWidgetIds: IntArray
     ) {
+        App.initLogging()
+        Timber.v("> onUpdate()")
+
+        Model.setup(context)
+
         for (appWidgetId in appWidgetIds) {
-            Log.i(TAG, "Updating widget with id $appWidgetId ...")
+            Timber.i("Updating widget with id $appWidgetId ...")
             Widget.updateAppWidget(context, appWidgetManager, appWidgetId)
         }
     }
 
+
+//    override fun onUpdate(
+//        context: Context,
+//        appWidgetManager: AppWidgetManager,
+//        appWidgetIds: IntArray?
+//    ) {
+//        Timber.v("> onUpdate()")
+//        val remoteViews = RemoteViews(context.packageName, R.layout.widgetlayout)
+//        val configIntent = Intent(context, Activity::class.java)
+//        val configPendingIntent = PendingIntent.getActivity(context, 0, configIntent, 0)
+//        remoteViews.setOnClickPendingIntent(R.id.widget, configPendingIntent)
+//        appWidgetManager.updateAppWidget(appWidgetIds, remoteViews)
+//    }
+
+
     override fun onDeleted(context: Context, appWidgetIds: IntArray) {
+        Timber.v("> onDelete()")
         // When the user deletes the widget, delete the preference associated with it.
         for (appWidgetId in appWidgetIds) {
             deleteTitlePref(context, appWidgetId)
@@ -30,18 +53,13 @@ class Provider : AppWidgetProvider() {
     }
 
     override fun onEnabled(context: Context) {
-        ensureRequiredPermissions(context, TAG, REQUIRED_PERMISSIONS)
-        model = model ?: Model(
-            context.getSystemService(BLUETOOTH_SERVICE) as BluetoothManager
-        )
+        App.initLogging()
+        Timber.v("> onEnabled()")
+        Model.setup(context)
     }
 
     override fun onDisabled(context: Context) {
-        model = null
-    }
-
-    companion object {
-        var model: Model? = null
+        Timber.v("> onDisabled()")
     }
 }
 

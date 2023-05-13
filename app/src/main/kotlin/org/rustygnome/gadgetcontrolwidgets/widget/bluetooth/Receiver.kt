@@ -7,8 +7,9 @@ import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.util.Log
+import timber.log.Timber
 
-class Receiver : BroadcastReceiver() {
+abstract class Receiver : BroadcastReceiver() {
 
     override fun onReceive(context: Context, intent: Intent) {
 
@@ -23,13 +24,13 @@ class Receiver : BroadcastReceiver() {
         intent.action?.let { action ->
             if (action.matches("android.bluetooth.adapter.action.STATE_CHANGED".toRegex())) {
                 val state = intent.getIntExtra(BluetoothAdapter.EXTRA_STATE, BluetoothAdapter.ERROR)
-                Log.e(TAG, "Received action '$action'.")
+                Timber.e("Received action '$action'.")
                 when (state) {
                     BluetoothAdapter.STATE_OFF -> {
-                        Provider.model?.setBluetoothAdapterEnabled(false)
+                        Model.instance.setBluetoothAdapterEnabled(false)
                     }
                     BluetoothAdapter.STATE_ON -> {
-                        Provider.model?.setBluetoothAdapterEnabled(true)
+                        Model.instance.setBluetoothAdapterEnabled(true)
                     }
                 }
             }
