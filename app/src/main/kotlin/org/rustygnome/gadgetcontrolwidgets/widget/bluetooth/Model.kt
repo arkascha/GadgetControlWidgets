@@ -53,8 +53,8 @@ class Model private constructor (
                 intent.action = AppWidgetManager.ACTION_APPWIDGET_UPDATE
 //                intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, appWidgetIds)
 
-                setImageViewResource(R.id.bluetoothWidget_verbose_gadgetIcon, item.icon)
-                setTextViewText(R.id.bluetoothWidget_verbose_gadgetName, item.name)
+//                setImageViewResource(R.id.bluetoothWidget_verbose_gadgetIcon, item.icon)
+//                setTextViewText(R.id.bluetoothWidget_verbose_gadgetName, item.name)
 
                 PendingIntent.getBroadcast(
                     context, 0, intent,
@@ -74,20 +74,14 @@ class Model private constructor (
         mutableListOf<Gadget>().apply {
             Timber.v("> getRegisteredGadgets()")
             try {
-                add(Adapter(context.getString(R.string.gadget_name_bluetooth_adapter)))
+                // this devices bluetooth adapter itself
+                add(Adapter())
+                // all gadgets currently boded to this device's bluetooth adapter
                 bluetoothManager.adapter.bondedDevices.forEach {
-                    add(
-                        Gadget(
-                            alias = it.alias,
-                            clazz = it.bluetoothClass,
-                            icon = R.drawable.ic_bluetooth,
-                            name = it.name,
-                            state = it.bondState,
-                            type = it.type,
-                        )
-                    )
+                    add(Device(it))
                 }
-                add(Dummy(context.getString(R.string.gadget_name_fluxx_capacitor)))
+                // a (passive) dummy gadget symbolizing gadgets bonded in future
+                add(Dummy())
             } catch (exception: SecurityException) {
                 Timber.e("Missing permission to access Bluetooth Adapter!")
             }
