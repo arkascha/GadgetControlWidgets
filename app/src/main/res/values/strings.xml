@@ -35,12 +35,10 @@
     <string name="bluetooth_service_audio">Audio</string>
     <string name="bluetooth_service_capture">Capture</string>
     <string name="bluetooth_service_information">Information</string>
-    <string name="bluetooth_service_le_audio">LE Audio</string>
-    <string name="bluetooth_service_limited_discoverability">Limited Discoverability</string>
+    <string name="bluetooth_service_le_audio">Audio</string>
     <string name="bluetooth_service_networking">Networking</string>
-    <string name="bluetooth_service_object_transfer">Object transfer</string>
+    <string name="bluetooth_service_object_transfer">Transfer</string>
     <string name="bluetooth_service_positioning">Positioning</string>
-    <string name="bluetooth_service_render">Render</string>
     <string name="bluetooth_service_telephony">Telephony</string>
 
 </resources>

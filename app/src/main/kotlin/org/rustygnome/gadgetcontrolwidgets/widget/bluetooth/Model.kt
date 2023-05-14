@@ -76,12 +76,6 @@ class Model private constructor (
             try {
                 add(Adapter(context.getString(R.string.gadget_name_bluetooth_adapter)))
                 bluetoothManager.adapter.bondedDevices.forEach {
-                    Timber.i("*** name: ${it.name}")
-                    Timber.i("*** type: ${it.type}")
-                    Timber.i("*** alias: ${it.alias}")
-                    Timber.i("*** deviceClass: ${it.bluetoothClass.deviceClass}")
-                    Timber.i("*** majorDeviceClass: ${it.bluetoothClass.majorDeviceClass}")
-
                     add(
                         Gadget(
                             alias = it.alias,
