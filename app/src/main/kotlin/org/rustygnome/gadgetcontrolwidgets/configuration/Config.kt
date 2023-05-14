@@ -26,27 +26,19 @@ class Config: Fragment() {
         savedInstanceState: Bundle?
     ): View {
         Timber.v("> onCreateView()")
-        _binding = ConfigBinding.inflate(inflater, container, false)
+        _binding = ConfigBinding.inflate(inflater)
         with(requireContext()) {
             App.initLogging()
             Model.setup(this)
         }
-        addGadgetsToList(inflater, container)
+        addGadgetsToList()
         return binding.root
     }
 
-    private fun addGadgetsToList(
-        inflater: LayoutInflater,
-        container: ViewGroup?
-    ) {
+    private fun addGadgetsToList() {
         Timber.v("> addGadgetsToList()")
-        Model.instance.getRegisteredGadgets().forEachIndexed { index, item ->
-            (inflater.inflate(R.layout.bluetooth_gadget_item, container) as FrameLayout)
-//                .also {
-//                    it.addView(item.toVerboseView(this.requireContext()))
-//                }.also {
-//                    binding.configBluetoothList.addView(it)
-//                }
+        Model.instance.getRegisteredGadgets(requireContext()).forEachIndexed { index, item ->
+            binding.configBluetoothList.addView(item.toVerboseView(this.requireContext()))
         }
     }
 

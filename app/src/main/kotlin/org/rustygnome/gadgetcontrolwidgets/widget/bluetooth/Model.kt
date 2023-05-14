@@ -3,6 +3,7 @@ package org.rustygnome.gadgetcontrolwidgets.widget.bluetooth
 import android.app.Application
 import android.app.PendingIntent
 import android.appwidget.AppWidgetManager
+import android.bluetooth.BluetoothAdapter
 import android.bluetooth.BluetoothManager
 import android.content.Context
 import android.content.Intent
@@ -43,7 +44,7 @@ class Model private constructor (
 
     internal fun initializeGadgetViews(context: Context, widget: RemoteViews) {
         Timber.v("> initializeGadgetViews()")
-        getRegisteredGadgets().forEachIndexed { index, item ->
+        getRegisteredGadgets(context).forEachIndexed { index, item ->
             RemoteViews(
                 context.packageName,
                 R.layout.bluetooth_gadget_verbose,
@@ -52,15 +53,15 @@ class Model private constructor (
                 intent.action = AppWidgetManager.ACTION_APPWIDGET_UPDATE
 //                intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, appWidgetIds)
 
-                setImageViewResource(R.id.bluetoothWidget_itemFull_itemIcon, item.icon)
-                setTextViewText(R.id.bluetoothWidget_itemFull_itemName, item.name)
+                setImageViewResource(R.id.bluetoothWidget_verbose_gadgetIcon, item.icon)
+                setTextViewText(R.id.bluetoothWidget_verbose_gadgetName, item.name)
 
                 PendingIntent.getBroadcast(
                     context, 0, intent,
                     PendingIntent.FLAG_UPDATE_CURRENT
                 ).also {
-                    setOnClickPendingIntent(R.id.bluetoothWidget_itemFull_itemIcon, it)
-                    setOnClickPendingIntent(R.id.bluetoothWidget_itemFull_itemName, it)
+                    setOnClickPendingIntent(R.id.bluetoothWidget_verbose_gadgetIcon, it)
+                    setOnClickPendingIntent(R.id.bluetoothWidget_verbose_gadgetName, it)
                 }
             }.also {
                 widget.addView(index, it)
@@ -69,24 +70,32 @@ class Model private constructor (
 
     }
 
-    internal fun getRegisteredGadgets(): List<Gadget> = mutableListOf<Gadget>().apply {
-        Timber.v("> getRegisteredGadgets()")
-        try {
-            add(Adapter())
-            bluetoothManager.adapter.bondedDevices.forEach {
-                add(
-                    Gadget(
-                        clazz = it.bluetoothClass,
-                        icon = R.drawable.ic_bluetooth,
-                        name = it.name,
-                        state = it.bondState,
-                        type = it.type,
+    internal fun getRegisteredGadgets(context: Context): List<Gadget> =
+        mutableListOf<Gadget>().apply {
+            Timber.v("> getRegisteredGadgets()")
+            try {
+                add(Adapter(context.getString(R.string.gadget_name_bluetooth_adapter)))
+                bluetoothManager.adapter.bondedDevices.forEach {
+                    Timber.i("*** name: ${it.name}")
+                    Timber.i("*** type: ${it.type}")
+                    Timber.i("*** alias: ${it.alias}")
+                    Timber.i("*** deviceClass: ${it.bluetoothClass.deviceClass}")
+                    Timber.i("*** majorDeviceClass: ${it.bluetoothClass.majorDeviceClass}")
+
+                    add(
+                        Gadget(
+                            alias = it.alias,
+                            clazz = it.bluetoothClass,
+                            icon = R.drawable.ic_bluetooth,
+                            name = it.name,
+                            state = it.bondState,
+                            type = it.type,
+                        )
                     )
-                )
+                }
+                add(Dummy(context.getString(R.string.gadget_name_fluxx_capacitor)))
+            } catch (exception: SecurityException) {
+                Timber.e("Missing permission to access Bluetooth Adapter!")
             }
-            add(Dummy())
-        } catch (exception: SecurityException) {
-            Timber.e("Missing permission to access Bluetooth Adapter!")
         }
-    }
 }

@@ -5,47 +5,67 @@ import android.bluetooth.BluetoothDevice
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
-import androidx.annotation.DrawableRes
 import org.rustygnome.gadgetcontrolwidgets.R
+import org.rustygnome.gadgetcontrolwidgets.databinding.BluetoothGadgetCompactBinding
+import org.rustygnome.gadgetcontrolwidgets.databinding.BluetoothGadgetVerboseBinding
 import timber.log.Timber
 
 open class Gadget (
-    val type: Int,
-    val clazz: BluetoothClass?,
+    val alias: String? = null,
+    val clazz: BluetoothClass? = null,
     val icon: Int,
     val name: String,
-    val state: Int,
+    val state: Int = 0,
+    val type: Int? = BluetoothDevice.DEVICE_TYPE_UNKNOWN,
 ) {
+
     init {
-        Timber.d("> init()");
+        Timber.d("> init($name)")
     }
 
     fun toCompactView(context: Context): View =
-        LayoutInflater
-            .from(context)
-            .inflate(R.layout.bluetooth_gadget_compact, null, false).apply {
-
+        BluetoothGadgetCompactBinding.inflate(LayoutInflater.from(context)).apply {
+            bluetoothWidgetCompactGadgetIcon.apply {
+                setImageResource(icon)
+                contentDescription = name
             }
+        }.root
 
     fun toVerboseView(context: Context): View =
-        LayoutInflater
-            .from(context)
-            .inflate(R.layout.bluetooth_gadget_verbose, null, false)
+        BluetoothGadgetVerboseBinding.inflate(LayoutInflater.from(context)).apply {
+            bluetoothWidgetVerboseGadgetIcon.apply {
+                setImageResource(icon)
+                contentDescription = name
+            }
+            bluetoothWidgetVerboseGadgetName.setText(phraseDisplayName())
+            bluetoothWidgetVerboseGadgetDescription.setText(phraseDisplayDescription(context))
+        }.root
 
+    private fun phraseDisplayName(): String =
+        alias?.run {
+            if (alias.isNotEmpty())
+                if (alias.equals(name)) alias else "$alias ($name)"
+            else name
+        } ?: name
+
+    private fun phraseDisplayDescription(context: Context): String =
+        mutableListOf<String>().apply {
+            Service.map.forEach { (service, name) ->
+                if (clazz?.hasService(service) == true) {
+                    add(context.getString(name))
+                }
+            }
+        }.run {
+            return if (isNotEmpty()) joinToString(", ") else context.getString(R.string.bluetooth_service_unknown)
+        }
 }
 
-class Adapter(): Gadget(
-    type = BluetoothDevice.DEVICE_TYPE_UNKNOWN,
-    clazz = null,
+class Adapter(name: String): Gadget(
     icon = R.drawable.ic_bluetooth,
-    name = "Adapter",
-    state = 0,
+    name = name,
 )
 
-class Dummy(): Gadget (
-    type = 0,
-    clazz = null,
+class Dummy(name: String): Gadget (
     icon = R.drawable.ic_unknown,
-    name = "unknown",
-    state = 0,
+    name = name,
 )

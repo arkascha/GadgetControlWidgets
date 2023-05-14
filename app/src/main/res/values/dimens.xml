@@ -3,5 +3,6 @@
 
     <dimen name="widget_margin">0dp</dimen>
     <dimen name="dialog_padding">16dp</dimen>
+    <dimen name="icon_size">42dp</dimen>
 
 </resources>
