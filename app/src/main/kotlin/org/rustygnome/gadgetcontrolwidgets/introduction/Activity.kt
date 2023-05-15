@@ -3,36 +3,38 @@ package org.rustygnome.gadgetcontrolwidgets.introduction
 import android.os.Bundle
 import android.text.SpannableString
 import android.text.style.BulletSpan
-import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.TextView
-import androidx.fragment.app.Fragment
+import androidx.appcompat.app.AppCompatActivity
 import org.rustygnome.gadgetcontrolwidgets.R
 import org.rustygnome.gadgetcontrolwidgets.databinding.IntroductionBinding
+import timber.log.Timber
 
+class Activity: AppCompatActivity() {
 
-class Introduction: Fragment() {
+    private lateinit var binding: IntroductionBinding
 
-    private var _binding: IntroductionBinding? = null
-    private val binding get() = _binding!!
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = IntroductionBinding.inflate(inflater, container, false)
-        initToggleUsageVisibility()
-        initUsageSteps()
-        return binding.root
+    init {
+        Timber.d("> init()")
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        Timber.v("> onCreate()");
+
+        binding = IntroductionBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Timber.v("> onResume()")
+
+        initToggleUsageVisibility()
+        initUsageSteps()
     }
 
     private fun initUsageSteps() {
@@ -65,7 +67,7 @@ class Introduction: Fragment() {
 
     private fun toggleUsageStepsToVisible(view: View) {
         view.visibility = View.VISIBLE
-        AnimationUtils.loadAnimation(requireContext(), R.anim.expand_vertical).also {
+        AnimationUtils.loadAnimation(this, R.anim.expand_vertical).also {
             it.setAnimationListener(object : Animation.AnimationListener {
                 override fun onAnimationStart(animation: Animation?) {
                     view.visibility = View.VISIBLE
@@ -80,7 +82,7 @@ class Introduction: Fragment() {
     }
 
     private fun toggleUsageStepsToGone(view: View) {
-        AnimationUtils.loadAnimation(requireContext(), R.anim.collapse_vertical).also {
+        AnimationUtils.loadAnimation(this, R.anim.collapse_vertical).also {
             it.setAnimationListener(object : Animation.AnimationListener {
                 override fun onAnimationStart(animation: Animation?) {
                     binding.introductionUsageToggle.setIconResource(R.drawable.ic_expand_more)

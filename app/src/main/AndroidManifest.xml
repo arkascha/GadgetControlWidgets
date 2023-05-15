@@ -19,13 +19,14 @@
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
+        android:name=".App"
         android:supportsRtl="true"
         android:theme="@style/Theme.GadgetControlWidgets">
 
         <receiver
             android:label="@string/widget_bluetooth_gadgets_horizontal_compact"
             android:description="@string/widget_bluetooth_description"
-            android:name=".widget.bluetooth.compact.Provider"
+            android:name=".widget.bluetooth.ProviderCompactHorizontal"
             android:exported="false">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
@@ -33,19 +34,6 @@
             <meta-data
                 android:name="android.appwidget.provider"
                 android:resource="@xml/provider_bluetooth_gadgets_horizontal_compact" />
-        </receiver>
-
-        <receiver
-            android:label="@string/widget_bluetooth_gadgets_vertical_verbose"
-            android:description="@string/widget_bluetooth_description"
-            android:name=".widget.bluetooth.verbose.Provider"
-            android:exported="false">
-            <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-            </intent-filter>
-            <meta-data
-                android:name="android.appwidget.provider"
-                android:resource="@xml/provider_bluetooth_gadgets_vertical_verbose" />
         </receiver>
 
 <!--
@@ -63,17 +51,42 @@
         </receiver>
 -->
 
+<!--
+        <receiver
+            android:label="@string/widget_bluetooth_gadgets_vertical_verbose"
+            android:description="@string/widget_bluetooth_description"
+            android:name=".widget.bluetooth.verbose.Provider"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/provider_bluetooth_gadgets_vertical_verbose" />
+        </receiver>
+-->
+
         <activity
-            android:name=".Gui"
+            android:name=".introduction.Activity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".configuration.Activity"
+            android:exported="false">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <action android:name="org.rustygnome.gadgetcontrolwidgets.ACTION_PERMISSION_REQUEST" />
+                <action android:name="org.rustygnome.gadgetcontrolwidgets.configuration" />
+                <category android:name="org.rustygnome.gadgetcontrolwidgets.configuration.bluetooth" />
             </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".permissions.Activity"
+            android:exported="false">
         </activity>
 
     </application>

@@ -4,8 +4,16 @@ import android.appwidget.AppWidgetManager
 import android.appwidget.AppWidgetProvider
 import android.content.Context
 import org.rustygnome.gadgetcontrolwidgets.App
-import org.rustygnome.gadgetcontrolwidgets.deleteTitlePref
 import timber.log.Timber
+
+class ProviderCompactHorizontal: Provider() {
+}
+
+class ProviderCompactVertical: Provider() {
+}
+
+class ProviderVerboseVertical: Provider() {
+}
 
 abstract class Provider : AppWidgetProvider() {
 
@@ -46,20 +54,14 @@ abstract class Provider : AppWidgetProvider() {
 
     override fun onDeleted(context: Context, appWidgetIds: IntArray) {
         Timber.v("> onDelete()")
-        // When the user deletes the widget, delete the preference associated with it.
-        for (appWidgetId in appWidgetIds) {
-            deleteTitlePref(context, appWidgetId)
-        }
     }
 
     override fun onEnabled(context: Context) {
         App.initLogging()
         Timber.v("> onEnabled()")
-        Model.setup(context)
     }
 
     override fun onDisabled(context: Context) {
         Timber.v("> onDisabled()")
     }
 }
-
