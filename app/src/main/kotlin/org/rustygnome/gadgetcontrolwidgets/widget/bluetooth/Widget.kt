@@ -30,14 +30,10 @@ internal class Widget(
     }
 
     companion object {
-        internal fun updateAppWidget(
-            context: Context,
-            appWidgetManager: AppWidgetManager,
-            appWidgetId: Int
-        ) {
-            with(Widget(context)) {
-                Timber.d("Updating widget with id $appWidgetId ...")
-                appWidgetManager.updateAppWidget(appWidgetId, this)
+        internal fun updateWidget(context: Context, appWidgetId: Int): Widget {
+            Timber.d("Updating widget with id $appWidgetId ...")
+            Widget(context).also {
+                return it
             }
         }
     }

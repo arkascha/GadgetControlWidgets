@@ -8,7 +8,7 @@
     android:targetCellWidth="4"
     android:targetCellHeight="2"
     android:description="@string/widget_bluetooth_description"
-    android:configure="org.rustygnome.gadgetcontrolwidgets.configuration.Activity"
+    android:configure="org.rustygnome.gadgetcontrolwidgets.configuration.VerticalVerboseBluetoothActivity"
     android:resizeMode="horizontal|vertical"
     android:widgetCategory="home_screen"
     android:widgetFeatures="reconfigurable|configuration_optional"

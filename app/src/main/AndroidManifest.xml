@@ -36,36 +36,6 @@
                 android:resource="@xml/provider_bluetooth_gadgets_horizontal_compact" />
         </receiver>
 
-<!--
-        <receiver
-            android:label="@string/widget_bluetooth_gadgets_vertical_compact"
-            android:description="@string/widget_bluetooth_description"
-            android:name=".widget.bluetooth.compact.Provider"
-            android:exported="false">
-            <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-            </intent-filter>
-            <meta-data
-                android:name="android.appwidget.provider"
-                android:resource="@xml/provider_bluetooth_gadgets_vertical_compact" />
-        </receiver>
--->
-
-<!--
-        <receiver
-            android:label="@string/widget_bluetooth_gadgets_vertical_verbose"
-            android:description="@string/widget_bluetooth_description"
-            android:name=".widget.bluetooth.verbose.Provider"
-            android:exported="false">
-            <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-            </intent-filter>
-            <meta-data
-                android:name="android.appwidget.provider"
-                android:resource="@xml/provider_bluetooth_gadgets_vertical_verbose" />
-        </receiver>
--->
-
         <activity
             android:name=".introduction.Activity"
             android:exported="true">
@@ -76,12 +46,18 @@
         </activity>
 
         <activity
-            android:name=".configuration.Activity"
+            android:name=".configuration.HorizontalCompactBluetoothActivity"
             android:exported="false">
-            <intent-filter>
-                <action android:name="org.rustygnome.gadgetcontrolwidgets.configuration" />
-                <category android:name="org.rustygnome.gadgetcontrolwidgets.configuration.bluetooth" />
-            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".configuration.VerticalCompactBluetoothActivity"
+            android:exported="false">
+        </activity>
+
+        <activity
+            android:name=".configuration.VerticalVerboseBluetoothActivity"
+            android:exported="false">
         </activity>
 
         <activity

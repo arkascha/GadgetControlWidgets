@@ -6,7 +6,7 @@
     android:targetCellWidth="3"
     android:targetCellHeight="1"
     android:description="@string/widget_bluetooth_description"
-    android:configure="org.rustygnome.gadgetcontrolwidgets.configuration.Activity"
+    android:configure="org.rustygnome.gadgetcontrolwidgets.configuration.HorizontalCompactBluetoothActivity"
     android:resizeMode="horizontal"
     android:widgetCategory="home_screen"
     android:widgetFeatures="reconfigurable|configuration_optional"

@@ -2,9 +2,15 @@ package org.rustygnome.gadgetcontrolwidgets.widget.bluetooth
 
 import android.appwidget.AppWidgetManager
 import android.appwidget.AppWidgetProvider
+import android.content.ComponentName
 import android.content.Context
+import android.content.Intent
 import org.rustygnome.gadgetcontrolwidgets.App
 import timber.log.Timber
+
+const val INTENT_ACTION_UPDATE_WIDGETS = "org.rustygnome.gadgetcontrolwidgets.INTENT_ACTION_UPDATE_WIDGETS"
+const val INTENT_EXTRA_CATEGORY = "org.rustygnome.gadgetcontrolwidgets.INTENT_EXTRA_CATEGORY"
+const val INTENT_EXTRA_HANDLE = "org.rustygnome.gadgetcontrolwidgets.INTENT_EXTRA_HANDLE"
 
 class ProviderCompactHorizontal: Provider() {
 }
@@ -21,6 +27,12 @@ abstract class Provider : AppWidgetProvider() {
         Timber.d("> init()")
     }
 
+    override fun onReceive(context: Context?, intent: Intent?) {
+        App.initLogging()
+        Timber.v("> onReceive()")
+        super.onReceive(context, intent)
+    }
+
     override fun onUpdate(
         context: Context,
         appWidgetManager: AppWidgetManager,
@@ -33,24 +45,11 @@ abstract class Provider : AppWidgetProvider() {
 
         for (appWidgetId in appWidgetIds) {
             Timber.i("Updating widget with id $appWidgetId ...")
-            Widget.updateAppWidget(context, appWidgetManager, appWidgetId)
+            Widget.updateWidget(context, appWidgetId).also {
+                appWidgetManager.updateAppWidget(appWidgetId, it)
+            }
         }
     }
-
-
-//    override fun onUpdate(
-//        context: Context,
-//        appWidgetManager: AppWidgetManager,
-//        appWidgetIds: IntArray?
-//    ) {
-//        Timber.v("> onUpdate()")
-//        val remoteViews = RemoteViews(context.packageName, R.layout.widgetlayout)
-//        val configIntent = Intent(context, Activity::class.java)
-//        val configPendingIntent = PendingIntent.getActivity(context, 0, configIntent, 0)
-//        remoteViews.setOnClickPendingIntent(R.id.widget, configPendingIntent)
-//        appWidgetManager.updateAppWidget(appWidgetIds, remoteViews)
-//    }
-
 
     override fun onDeleted(context: Context, appWidgetIds: IntArray) {
         Timber.v("> onDelete()")
@@ -64,4 +63,9 @@ abstract class Provider : AppWidgetProvider() {
     override fun onDisabled(context: Context) {
         Timber.v("> onDisabled()")
     }
+
+    private fun getInstalledWidgetIds(context: Context): IntArray =
+        // ToDo: is Provider::clas..java really the right one here?
+        AppWidgetManager.getInstance(context)
+            .getAppWidgetIds(ComponentName(context, Provider::class.java))
 }
