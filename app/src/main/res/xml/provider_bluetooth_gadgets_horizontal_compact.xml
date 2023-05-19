@@ -1,14 +1,14 @@
 <appwidget-provider
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:initialLayout="@layout/bluetooth_gadget_verbose"
-    android:minWidth="120px"
-    android:minHeight="40dp"
+    android:minWidth="@dimen/compact_size"
+    android:minHeight="@dimen/compact_size"
     android:targetCellWidth="3"
     android:targetCellHeight="1"
     android:description="@string/widget_bluetooth_description"
     android:configure="org.rustygnome.gadgetcontrolwidgets.configuration.HorizontalCompactBluetoothActivity"
     android:resizeMode="horizontal"
-    android:widgetCategory="home_screen"
+    android:widgetCategory="keyguard|home_screen"
     android:widgetFeatures="reconfigurable|configuration_optional"
-    android:previewLayout="@layout/bluetooth_gadget_widget_horizontal">
+    android:previewLayout="@layout/bluetooth_gadget_widget_horizontal_list">
 </appwidget-provider>

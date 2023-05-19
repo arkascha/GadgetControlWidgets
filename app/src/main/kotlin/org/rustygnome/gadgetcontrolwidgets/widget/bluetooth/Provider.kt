@@ -13,12 +13,18 @@ const val INTENT_EXTRA_CATEGORY = "org.rustygnome.gadgetcontrolwidgets.INTENT_EX
 const val INTENT_EXTRA_HANDLE = "org.rustygnome.gadgetcontrolwidgets.INTENT_EXTRA_HANDLE"
 
 class ProviderCompactHorizontal: Provider() {
+    override fun createWidget(context: Context): Widget =
+        HorizontalCompactWidget(context)
 }
 
 class ProviderCompactVertical: Provider() {
+    override fun createWidget(context: Context): Widget =
+        VerticalCompactWidget(context)
 }
 
 class ProviderVerboseVertical: Provider() {
+    override fun createWidget(context: Context): Widget =
+        VerticalVerboseWidget(context)
 }
 
 abstract class Provider : AppWidgetProvider() {
@@ -26,6 +32,8 @@ abstract class Provider : AppWidgetProvider() {
     init {
         Timber.d("> init()")
     }
+
+    abstract internal fun createWidget(context: Context): Widget
 
     override fun onReceive(context: Context?, intent: Intent?) {
         App.initLogging()
@@ -45,7 +53,7 @@ abstract class Provider : AppWidgetProvider() {
 
         for (appWidgetId in appWidgetIds) {
             Timber.i("Updating widget with id $appWidgetId ...")
-            Widget.updateWidget(context, appWidgetId).also {
+            createWidget(context).also {
                 appWidgetManager.updateAppWidget(appWidgetId, it)
             }
         }
@@ -63,9 +71,4 @@ abstract class Provider : AppWidgetProvider() {
     override fun onDisabled(context: Context) {
         Timber.v("> onDisabled()")
     }
-
-    private fun getInstalledWidgetIds(context: Context): IntArray =
-        // ToDo: is Provider::clas..java really the right one here?
-        AppWidgetManager.getInstance(context)
-            .getAppWidgetIds(ComponentName(context, Provider::class.java))
 }

@@ -45,6 +45,10 @@ open class Activity(
         super.onResume()
         Timber.v("> onResume()")
 
+        placeFragmentInContainer()
+    }
+
+    private fun placeFragmentInContainer() {
         fragment().also {
             supportFragmentManager
                 .beginTransaction()
@@ -54,9 +58,12 @@ open class Activity(
     }
 
     override fun onPause() {
-        super.onPause()
         Timber.v("> onPause()")
+        triggerUpdateOfWidgets()
+        super.onPause()
+    }
 
+    private fun triggerUpdateOfWidgets() {
         Intent(this, provider).run {
             action = AppWidgetManager.ACTION_APPWIDGET_UPDATE
             AppWidgetManager.getInstance(application)

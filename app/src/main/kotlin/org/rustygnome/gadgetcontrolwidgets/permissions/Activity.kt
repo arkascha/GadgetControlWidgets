@@ -20,10 +20,10 @@ class Activity: AppCompatActivity() {
         ActivityResultContracts.RequestPermission()
     ) { isGranted: Boolean ->
         if (isGranted) {
-            Timber.d("Permission ??? granted.")
+            Timber.d("Permission(s) granted: ${permissions.joinToString { ", " }}")
             finish()
         } else {
-            Timber.d("Permission ??? denied.")
+            Timber.d("Permission(s) denied: ${permissions.joinToString { ", " }}")
             binding.permissionsDenialMessage.visibility = VISIBLE
         }
     }

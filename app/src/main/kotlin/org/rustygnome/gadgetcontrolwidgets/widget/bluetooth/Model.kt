@@ -36,17 +36,16 @@ class Model private constructor (
         bluetoothAdapterEnabled.value = enabled
     }
 
-    internal fun getRegisteredGadgets(context: Context): List<Gadget> =
+    internal fun getBondedGadgets(context: Context): List<Gadget> =
         mutableListOf<Gadget>().apply {
             Timber.v("> getRegisteredGadgets()")
             try {
-                // this devices bluetooth adapter itself
-                add(Adapter())
                 // all gadgets currently boded to this device's bluetooth adapter
                 bluetoothManager.adapter.bondedDevices.forEach {
                     add(Device(it))
                 }
-                // a (passive) dummy gadget symbolizing gadgets bonded in future
+                // TODO: remove temporary dummy devices
+                add(Dummy())
                 add(Dummy())
             } catch (exception: SecurityException) {
                 Timber.e("Missing permission to access Bluetooth Adapter!")

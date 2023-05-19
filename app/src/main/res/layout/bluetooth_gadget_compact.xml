@@ -1,19 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
 
     android:id="@+id/bluetoothWidget_compact_gadgetContainer"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal">
+    android:layout_margin="@dimen/card_margin"
+    android:theme="@style/CardView">
 
     <ImageView
         android:id="@+id/bluetoothWidget_compact_gadgetIcon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"
+        android:layout_width="@dimen/icon_size"
+        android:layout_height="@dimen/icon_size"
         android:src="@mipmap/ic_launcher"
-        android:contentDescription="TODO" />
+        android:theme="@style/Theme.MaterialComponents"
+        tools:ignore="ContentDescription" />
 
-</LinearLayout>
+</RelativeLayout>

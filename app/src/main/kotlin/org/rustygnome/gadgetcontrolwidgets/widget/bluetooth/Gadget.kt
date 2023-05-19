@@ -6,6 +6,7 @@ import android.bluetooth.BluetoothDevice
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
+import androidx.compose.runtime.derivedStateOf
 import org.rustygnome.gadgetcontrolwidgets.R
 import org.rustygnome.gadgetcontrolwidgets.databinding.BluetoothGadgetCompactBinding
 import org.rustygnome.gadgetcontrolwidgets.databinding.BluetoothGadgetVerboseBinding

@@ -6,6 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import org.rustygnome.gadgetcontrolwidgets.databinding.ConfigurationBluetoothBinding
+import org.rustygnome.gadgetcontrolwidgets.widget.bluetooth.Adapter
+import org.rustygnome.gadgetcontrolwidgets.widget.bluetooth.Dummy
 import org.rustygnome.gadgetcontrolwidgets.widget.bluetooth.Model
 import timber.log.Timber
 
@@ -35,7 +37,12 @@ class Bluetooth: Fragment() {
 
     private fun addGadgetsToList() {
         Timber.v("> addGadgetsToList()")
-        Model.instance.getRegisteredGadgets(requireContext()).forEachIndexed { _, item ->
+        Model.instance.getBondedGadgets(requireContext()).toMutableList().apply {
+            // this devices bluetooth adapter itself
+            add(0, Adapter())
+            // a (passive) dummy gadget symbolizing gadgets bonded in future
+            add(Dummy())
+        }.forEachIndexed { _, item ->
             binding.configurationBluetoothList.addView(item.toVerboseView(requireContext()))
         }
     }
