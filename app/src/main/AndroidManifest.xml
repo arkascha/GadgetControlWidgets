@@ -49,6 +49,19 @@
                 android:resource="@xml/provider_bluetooth_gadgets_vertical_compact" />
         </receiver>
 
+        <receiver
+            android:label="@string/widget_bluetooth_gadgets_vertical_verbose"
+            android:description="@string/widget_bluetooth_description"
+            android:name=".widget.bluetooth.ProviderVerboseVertical"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/provider_bluetooth_gadgets_vertical_verbose" />
+        </receiver>
+
         <activity
             android:name=".introduction.Activity"
             android:exported="true">
@@ -60,7 +73,7 @@
 
         <activity
             android:name=".configuration.HorizontalCompactBluetoothActivity"
-            android:exported="false">
+            android:exported="true">
         </activity>
 
         <activity

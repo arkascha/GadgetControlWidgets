@@ -11,7 +11,6 @@ import timber.log.Timber
 class Model private constructor (
     private val bluetoothManager: BluetoothManager
 ) {
-    private val bluetoothAdapterEnabled: MutableLiveData<Boolean> = MutableLiveData(false)
 
     init {
         Timber.v("> init()")
@@ -29,24 +28,17 @@ class Model private constructor (
         }
     }
 
-    public fun isBluetoothEnabled(): LiveData<Boolean> = bluetoothAdapterEnabled
-
-    public fun setBluetoothAdapterEnabled(enabled: Boolean) {
-        Timber.v("> setBluetoothAdapterEnabled()")
-        bluetoothAdapterEnabled.value = enabled
-    }
-
-    internal fun getBondedGadgets(context: Context): List<Gadget> =
+    internal fun getListOfGadgets(): List<Gadget> =
         mutableListOf<Gadget>().apply {
             Timber.v("> getRegisteredGadgets()")
             try {
-                // all gadgets currently boded to this device's bluetooth adapter
+                // this devices bluetooth adapter itself
+                add(0, Adapter())
+                // all gadgets currently bonded to this device's bluetooth adapter
                 bluetoothManager.adapter.bondedDevices.forEach {
                     add(Device(it))
                 }
-                // TODO: remove temporary dummy devices
-                add(Dummy())
-                add(Dummy())
+                Timber.v("Found $size gadgets.")
             } catch (exception: SecurityException) {
                 Timber.e("Missing permission to access Bluetooth Adapter!")
             }

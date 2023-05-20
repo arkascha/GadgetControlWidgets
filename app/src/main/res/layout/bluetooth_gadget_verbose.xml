@@ -3,10 +3,10 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@color/cardview_dark_background"
     android:id="@+id/bluetoothWidget_verbose_gadgetContainer"
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:background="@drawable/gadget_shape"
     android:layout_margin="@dimen/card_margin"
     android:theme="@style/CardView">
 

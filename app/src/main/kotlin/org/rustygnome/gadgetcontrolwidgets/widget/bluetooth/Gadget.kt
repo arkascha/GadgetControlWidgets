@@ -6,20 +6,26 @@ import android.bluetooth.BluetoothDevice
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
-import androidx.compose.runtime.derivedStateOf
+import android.widget.RemoteViews
 import org.rustygnome.gadgetcontrolwidgets.R
-import org.rustygnome.gadgetcontrolwidgets.databinding.BluetoothGadgetCompactBinding
 import org.rustygnome.gadgetcontrolwidgets.databinding.BluetoothGadgetVerboseBinding
 import timber.log.Timber
 
 abstract class Gadget {
-    fun toCompactView(context: Context): View =
-        BluetoothGadgetCompactBinding.inflate(LayoutInflater.from(context)).apply {
-            bluetoothWidgetCompactGadgetIcon.apply {
-                setImageResource(choseGadgetIcon(context))
-                contentDescription = phraseGadgetDescription(context)
-            }
-        }.root
+    fun toCompactRemoteViews(context: Context): RemoteViews =
+        RemoteViews(context.packageName, R.layout.bluetooth_gadget_compact).apply {
+            setImageViewResource(R.id.bluetoothWidget_compact_gadgetIcon, choseGadgetIcon(context))
+            setContentDescription(R.id.bluetoothWidget_compact_gadgetIcon, phraseGadgetDescription(context))
+        }
+
+    fun toVerboseRemoteViews(context: Context): RemoteViews =
+        RemoteViews(context.packageName, R.layout.bluetooth_gadget_compact).apply {
+            setImageViewResource(R.id.bluetoothWidget_verbose_gadgetIcon, choseGadgetIcon(context))
+            setContentDescription(R.id.bluetoothWidget_verbose_gadgetIcon, phraseGadgetDescription(context))
+
+            setTextViewText(R.id.bluetoothWidget_verbose_gadgetName, phraseGadgetName(context))
+            setTextViewText(R.id.bluetoothWidget_verbose_gadgetDescription, phraseGadgetServices(context))
+        }
 
     fun toVerboseView(context: Context): View =
         BluetoothGadgetVerboseBinding.inflate(LayoutInflater.from(context)).apply {

@@ -39,7 +39,7 @@ class Activity: AppCompatActivity() {
 
     private fun initUsageSteps() {
         resources.getStringArray(R.array.introduction_usage_steps).also {
-            it.forEachIndexed { index, step ->
+            it.forEach { step ->
                 with(binding.introductionUsageSteps as ViewGroup) {
                     TextView(context).apply {
                         text = SpannableString(step).apply {

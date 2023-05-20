@@ -10,5 +10,5 @@
     android:resizeMode="horizontal"
     android:widgetCategory="keyguard|home_screen"
     android:widgetFeatures="reconfigurable|configuration_optional"
-    android:previewLayout="@layout/bluetooth_gadget_widget_horizontal_list">
+    android:previewLayout="@layout/bluetooth_widget_horizontal">
 </appwidget-provider>

@@ -37,9 +37,7 @@ class Bluetooth: Fragment() {
 
     private fun addGadgetsToList() {
         Timber.v("> addGadgetsToList()")
-        Model.instance.getBondedGadgets(requireContext()).toMutableList().apply {
-            // this devices bluetooth adapter itself
-            add(0, Adapter())
+        Model.instance.getListOfGadgets().toMutableList().apply {
             // a (passive) dummy gadget symbolizing gadgets bonded in future
             add(Dummy())
         }.forEachIndexed { _, item ->
