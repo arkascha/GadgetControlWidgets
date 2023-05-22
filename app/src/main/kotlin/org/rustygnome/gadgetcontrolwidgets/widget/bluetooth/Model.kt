@@ -9,7 +9,6 @@ import androidx.lifecycle.ViewModel
 import org.rustygnome.gadgetcontrolwidgets.ensureRequiredPermissions
 import timber.log.Timber
 
-
 const val MODE_BLACKLIST = false
 const val CHECKED_GADGETS = "checked gadgets"
 
@@ -23,12 +22,13 @@ class Model private constructor (
     }
 
     companion object {
-        private val sharedPreferencesName = javaClass.packageName
+        private val sharedPreferencesName = Companion::class.java.name
         private lateinit var _instance: Model
         val instance: Model get() = _instance
 
         fun setup(context: Context) {
-            ensureRequiredPermissions(context, REQUIRED_PERMISSIONS)
+            Timber.v("> setup()")
+//            ensureRequiredPermissions(context, REQUIRED_PERMISSIONS)
             _instance = Model(
                 bluetoothManager = context.getSystemService(Application.BLUETOOTH_SERVICE) as BluetoothManager,
                 sharedPreferences = context.getSharedPreferences(sharedPreferencesName, MODE_PRIVATE),

@@ -18,7 +18,7 @@ fun ensureRequiredPermissions(
         Timber.d("Required permissions '$requiredPermission' not yet granted.")
         Intent(context, Activity::class.java).apply {
             action = INTENT_ACTION_PERMISSION_REQUEST
-//            addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
+            addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
             addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             putExtra(INTENT_EXTRA_KEY_PERMISSIONS, arrayOf(requiredPermission))
         }.run {

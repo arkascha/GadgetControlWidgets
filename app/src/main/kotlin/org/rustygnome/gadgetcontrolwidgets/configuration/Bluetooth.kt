@@ -10,7 +10,9 @@ import androidx.core.view.forEach
 import androidx.fragment.app.Fragment
 import org.rustygnome.gadgetcontrolwidgets.R
 import org.rustygnome.gadgetcontrolwidgets.databinding.ConfigurationBluetoothBinding
+import org.rustygnome.gadgetcontrolwidgets.ensureRequiredPermissions
 import org.rustygnome.gadgetcontrolwidgets.widget.bluetooth.Model
+import org.rustygnome.gadgetcontrolwidgets.widget.bluetooth.REQUIRED_PERMISSIONS
 import timber.log.Timber
 
 class Bluetooth: Fragment() {
@@ -25,6 +27,7 @@ class Bluetooth: Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         super.onCreateView(inflater, container, savedInstanceState)
         Timber.v("> onCreateView()")
+        ensureRequiredPermissions(requireContext(), REQUIRED_PERMISSIONS)
         ConfigurationBluetoothBinding.inflate(inflater,container,false).also {
             binding = it
         }
