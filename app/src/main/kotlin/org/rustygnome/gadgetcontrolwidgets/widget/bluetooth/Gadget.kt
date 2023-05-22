@@ -45,7 +45,7 @@ class Adapter: Gadget("Adapter") {
 
 @SuppressLint("MissingPermission")
 open class Device(
-    val device: BluetoothDevice
+    private val device: BluetoothDevice
 ) : Gadget(device.name) {
 
     init {

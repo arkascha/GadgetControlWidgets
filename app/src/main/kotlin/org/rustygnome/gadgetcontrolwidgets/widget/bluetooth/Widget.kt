@@ -35,11 +35,16 @@ internal abstract class Widget(
 
     private fun initializeGadgetViews(context: Context) {
         Timber.v("> initializeGadgetViews()")
-        with(getWidgetContainerView()) {
+        val setOfCheckedGadgetNames = Model.instance.readSetOfCheckedGadgetNames()
+        getWidgetContainerView().apply {
             removeAllViews(getWidgetContainerView().id)
-            Model.instance.getListOfGadgets().forEachIndexed { index, gadget ->
-                Timber.v("Adding gadget number $index.")
-                addGadget(this, gadget, context)
+            Model.instance.getListOfGadgets().filter {
+                setOfCheckedGadgetNames.contains(it.name(context))
+            }.forEachIndexed { index, gadget ->
+                run {
+                    Timber.v("Adding gadget number $index.")
+                    addGadget(this, gadget, context)
+                }
             }
         }
     }
