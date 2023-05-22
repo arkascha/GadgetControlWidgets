@@ -4,10 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.CheckBox
+import androidx.core.view.children
+import androidx.core.view.forEach
 import androidx.fragment.app.Fragment
+import org.rustygnome.gadgetcontrolwidgets.R
 import org.rustygnome.gadgetcontrolwidgets.databinding.ConfigurationBluetoothBinding
-import org.rustygnome.gadgetcontrolwidgets.widget.bluetooth.Adapter
-import org.rustygnome.gadgetcontrolwidgets.widget.bluetooth.Dummy
 import org.rustygnome.gadgetcontrolwidgets.widget.bluetooth.Model
 import timber.log.Timber
 
@@ -32,21 +34,59 @@ class Bluetooth: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         Timber.v("> onViewCreated()")
         addGadgetsToList()
+        enableCheckBox()
     }
 
 
     private fun addGadgetsToList() {
         Timber.v("> addGadgetsToList()")
-        Model.instance.getListOfGadgets().toMutableList().apply {
-            // a (passive) dummy gadget symbolizing gadgets bonded in future
-            add(Dummy())
-        }.forEachIndexed { _, item ->
-            binding.configurationBluetoothList.addView(item.toVerboseView(requireContext()))
+        binding.configurationBluetoothList.also {
+            Model.instance.getListOfGadgets().forEach { gadget ->
+                it.addView(
+                    Item(gadget) {
+                        storeSetOfCheckedGadgets()
+                    }.toConfigurationView(requireContext())
+                )
+            }
         }
+    }
+
+    private fun enableCheckBox() {
+        Timber.v("> enableCheckBox()")
+        binding.configurationBluetoothCheckBox.apply {
+            setOnClickListener {
+                isChecked = false
+                binding.configurationBluetoothList.forEach {
+                    it.findViewById<CheckBox>(R.id.bluetoothWidget_configuration_checkBox).isChecked = true
+                }
+            }
+        }
+    }
+
+    private fun storeSetOfCheckedGadgets() {
+        Timber.v("> storeSetOfCheckedGadgets()")
+        mutableSetOf<String>().apply {
+            binding.configurationBluetoothList.children.forEach {
+                it.findViewById<CheckBox>(R.id.bluetoothWidget_configuration_checkBox).run {
+                    if (tag != null && isChecked) {
+                        this@apply.add(tag as String)
+                    }
+                }
+            }
+        }.also {
+            Model.instance.writeSetOfCheckedGadgetNames(it)
+        }
+    }
+
+    override fun onPause() {
+        Timber.v("> onPause()")
+        storeSetOfCheckedGadgets()
+        super.onPause()
     }
 
     override fun onDestroyView() {
         Timber.v("> onDestroyView()")
         super.onDestroyView()
     }
+
 }

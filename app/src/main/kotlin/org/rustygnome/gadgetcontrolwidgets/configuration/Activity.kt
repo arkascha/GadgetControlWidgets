@@ -6,8 +6,10 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import org.rustygnome.gadgetcontrolwidgets.App
 import org.rustygnome.gadgetcontrolwidgets.databinding.ConfigurationBinding
+import org.rustygnome.gadgetcontrolwidgets.widget.bluetooth.Model
 import org.rustygnome.gadgetcontrolwidgets.widget.bluetooth.Provider
 import org.rustygnome.gadgetcontrolwidgets.widget.bluetooth.ProviderCompactHorizontal
 import timber.log.Timber
@@ -26,6 +28,8 @@ open class Activity(
     init {
         Timber.d("> init()")
     }
+
+    fun getModel() = ViewModelProvider(this)[Model::class.java]
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

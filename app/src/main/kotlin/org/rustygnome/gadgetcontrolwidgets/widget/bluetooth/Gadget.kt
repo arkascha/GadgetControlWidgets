@@ -4,90 +4,64 @@ import android.annotation.SuppressLint
 import android.bluetooth.BluetoothClass
 import android.bluetooth.BluetoothDevice
 import android.content.Context
-import android.view.LayoutInflater
-import android.view.View
 import android.widget.RemoteViews
 import org.rustygnome.gadgetcontrolwidgets.R
-import org.rustygnome.gadgetcontrolwidgets.databinding.BluetoothGadgetVerboseBinding
+import org.rustygnome.gadgetcontrolwidgets.configuration.Item
 import timber.log.Timber
 
-abstract class Gadget {
+abstract class Gadget(
+    val tag: String
+) {
     fun toCompactRemoteViews(context: Context): RemoteViews =
         RemoteViews(context.packageName, R.layout.bluetooth_gadget_compact).apply {
-            setImageViewResource(R.id.bluetoothWidget_compact_gadgetIcon, choseGadgetIcon(context))
-            setContentDescription(R.id.bluetoothWidget_compact_gadgetIcon, phraseGadgetDescription(context))
+            setImageViewResource(R.id.bluetoothWidget_compact_gadgetIcon, icon(context))
+            setContentDescription(R.id.bluetoothWidget_compact_gadgetIcon, description(context))
         }
 
     fun toVerboseRemoteViews(context: Context): RemoteViews =
         RemoteViews(context.packageName, R.layout.bluetooth_gadget_compact).apply {
-            setImageViewResource(R.id.bluetoothWidget_verbose_gadgetIcon, choseGadgetIcon(context))
-            setContentDescription(R.id.bluetoothWidget_verbose_gadgetIcon, phraseGadgetDescription(context))
-
-            setTextViewText(R.id.bluetoothWidget_verbose_gadgetName, phraseGadgetName(context))
-            setTextViewText(R.id.bluetoothWidget_verbose_gadgetDescription, phraseGadgetServices(context))
+            setImageViewResource(R.id.bluetoothWidget_verbose_gadgetIcon, icon(context))
+            setContentDescription(R.id.bluetoothWidget_verbose_gadgetIcon, description(context))
+            setTextViewText(R.id.bluetoothWidget_verbose_gadgetName, name(context))
+            setTextViewText(R.id.bluetoothWidget_verbose_gadgetDescription, services(context))
         }
 
-    fun toVerboseView(context: Context): View =
-        BluetoothGadgetVerboseBinding.inflate(LayoutInflater.from(context)).apply {
-            bluetoothWidgetVerboseGadgetIcon.apply {
-                setImageResource(choseGadgetIcon(context))
-                contentDescription = phraseGadgetDescription(context)
-            }
-            bluetoothWidgetVerboseGadgetName.setText(phraseGadgetName(context))
-            bluetoothWidgetVerboseGadgetDescription.setText(phraseGadgetServices(context))
-        }.root
-
-    protected abstract fun choseGadgetIcon(context: Context): Int
-
-    protected abstract fun phraseGadgetName(context: Context): String
-    protected abstract fun phraseGadgetDescription(context: Context): String
-    protected abstract fun phraseGadgetServices(context: Context): String
+    abstract fun name(context: Context): String
+    abstract fun description(context: Context): String
+    abstract fun services(context: Context): String
+    abstract fun icon(context: Context): Int
 }
 
-final class Adapter: Gadget() {
-    override fun phraseGadgetName(context: Context): String =
+class Adapter: Gadget("Adapter") {
+    override fun name(context: Context): String =
         context.getString(R.string.gadget_name_bluetooth_adapter)
-    override fun phraseGadgetDescription(context: Context): String =
+    override fun description(context: Context): String =
         context.getString(R.string.gadget_name_bluetooth_adapter)
-    override fun phraseGadgetServices(context: Context): String =
+    override fun services(context: Context): String =
         context.getString(R.string.bluetooth_service_adapter)
-    override fun choseGadgetIcon(context: Context): Int =
+    override fun icon(context: Context): Int =
         R.drawable.ic_bluetooth
-}
-
-final class Dummy: Gadget() {
-    override fun phraseGadgetName(context: Context): String =
-        context.getString(R.string.gadget_name_dummy)
-
-    override fun phraseGadgetDescription(context: Context): String =
-        context.getString(R.string.gadget_name_dummy)
-
-    override fun phraseGadgetServices(context: Context): String =
-        context.getString(R.string.bluetooth_service_unknown)
-
-    override fun choseGadgetIcon(context: Context): Int =
-        R.drawable.ic_unknown
 }
 
 @SuppressLint("MissingPermission")
 open class Device(
     val device: BluetoothDevice
-) : Gadget() {
+) : Gadget(device.name) {
 
     init {
         Timber.d("> init(${device.name})")
     }
 
-    override fun phraseGadgetName(context: Context): String =
+    override fun name(context: Context): String =
         device.alias?.run {
             if (device.alias!!.isNotEmpty())
                 if (device.alias.equals(device.name)) device.alias else "${device.alias} (${device.name})"
             else device.name
         } ?: device.name
 
-    override fun phraseGadgetDescription(context: Context): String = device.alias ?: device.name
+    override fun description(context: Context): String = device.alias ?: device.name
 
-    override fun phraseGadgetServices(context: Context): String =
+    override fun services(context: Context): String =
         mutableListOf<String>().apply {
             Service.map.forEach { (service, name) ->
                 if (device.bluetoothClass.hasService(service)) {
@@ -98,7 +72,7 @@ open class Device(
             return if (isNotEmpty()) joinToString(", ") else context.getString(Service.unknown)
         }
 
-    override fun choseGadgetIcon(context: Context): Int =
+    override fun icon(context: Context): Int =
         if (device.bluetoothClass.majorDeviceClass.equals(BluetoothClass.Device.Major.COMPUTER))
             R.drawable.ic_device_laptop
         else if (device.bluetoothClass.majorDeviceClass.equals(BluetoothClass.Device.Major.HEALTH))

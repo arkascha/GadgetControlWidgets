@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/bluetooth_configuration_itemContainer"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <CheckBox
+        android:id="@+id/bluetoothWidget_configuration_checkBox"
+        android:layout_width="@dimen/icon_size"
+        android:layout_height="match_parent" />
+
+    <include
+        android:id="@+id/bluetoothWidget_configuration_gadget"
+        layout="@layout/bluetooth_gadget_verbose" />
+
+</LinearLayout>
