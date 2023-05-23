@@ -1,5 +1,6 @@
 package org.rustygnome.gadgetcontrolwidgets.permissions
 
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.View.VISIBLE
@@ -21,6 +22,7 @@ class Activity: AppCompatActivity() {
     ) { isGranted: Boolean ->
         if (isGranted) {
             Timber.d("Permission(s) granted: ${permissions.joinToString { ", " }}")
+            setResult(RESULT_OK)
             finish()
         } else {
             Timber.d("Permission(s) denied: ${permissions.joinToString { ", " }}")

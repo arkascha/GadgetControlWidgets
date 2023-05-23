@@ -1,7 +1,12 @@
 <resources>
     <string name="app_name">Gadget Control Widgets</string>
 
+    <string name="configuration_name">Configuration</string>
+    <string name="configuration_done">Done</string>
+
     <string name="widget_bluetooth_description">Bluetooth Gadgets</string>
+    <string name="widget_bluetooth_boded_gadgets">Aktuell bekannte Bluetooth Gadgets:</string>
+    <string name="widget_bluetooth_mode_description">Whitelist / Blacklist</string>
     <string name="widget_bluetooth_gadgets_vertical_verbose">Vertical, verbose</string>
     <string name="widget_bluetooth_gadgets_vertical_compact">Vertical, compact</string>
     <string name="widget_bluetooth_gadgets_horizontal_compact">Horizontal, compact</string>

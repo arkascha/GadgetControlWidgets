@@ -2,6 +2,7 @@
 <resources>
 
     <dimen name="card_margin">8dp</dimen>
+    <dimen name="button_margin">8dp</dimen>
     <dimen name="widget_margin">4dp</dimen>
     <dimen name="widget_padding">4dp</dimen>
     <dimen name="dialog_padding">16dp</dimen>

@@ -38,7 +38,7 @@ internal abstract class Widget(
         val setOfCheckedGadgetNames = Model.instance.readSetOfCheckedGadgetNames()
         getWidgetContainerView().apply {
             removeAllViews(getWidgetContainerView().id)
-            Model.instance.getListOfGadgets().filter {
+            Model.instance.getListOfGadgets(context).filter {
                 setOfCheckedGadgetNames.contains(it.name(context))
             }.forEachIndexed { index, gadget ->
                 run {

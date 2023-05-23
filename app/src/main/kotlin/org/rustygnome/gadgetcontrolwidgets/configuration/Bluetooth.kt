@@ -43,13 +43,18 @@ class Bluetooth: Fragment() {
 
     private fun addGadgetsToList() {
         Timber.v("> addGadgetsToList()")
-        binding.configurationBluetoothList.also {
-            Model.instance.getListOfGadgets().forEach { gadget ->
-                it.addView(
-                    Item(gadget) {
-                        storeSetOfCheckedGadgets()
-                    }.toConfigurationView(requireContext())
-                )
+        binding.configurationBluetoothList.run {
+            // first remove _all_ gadgets
+            this.removeAllViewsInLayout()
+            // add available gadgets
+            requireContext().also {
+                Model.instance.getListOfGadgets(it).forEach { gadget ->
+                    addView(
+                        Item(gadget) {
+                            storeSetOfCheckedGadgets()
+                        }.toConfigurationView(it)
+                    )
+                }
             }
         }
     }

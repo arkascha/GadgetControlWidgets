@@ -36,9 +36,10 @@ class Model private constructor (
         }
     }
 
-    internal fun getListOfGadgets(): List<Gadget> =
-        mutableListOf<Gadget>().apply {
-            Timber.v("> getRegisteredGadgets()")
+    internal fun getListOfGadgets(context: Context): List<Gadget> {
+        ensureRequiredPermissions(context, REQUIRED_PERMISSIONS)
+        return mutableListOf<Gadget>().apply {
+            Timber.v("> getListOfGadgets()")
             try {
                 // this devices bluetooth adapter itself
                 add(0, Adapter())
@@ -51,6 +52,7 @@ class Model private constructor (
                 Timber.e("Missing permission to access Bluetooth Adapter!")
             }
         }
+    }
 
     internal fun writeSetOfCheckedGadgetNames(gadgets: Set<String>) {
         sharedPreferences.edit()

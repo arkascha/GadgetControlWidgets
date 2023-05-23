@@ -13,7 +13,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="end"
-        android:text="Whitelist / Blacklist"
+        android:text="@string/widget_bluetooth_mode_description"
         />
 
     <CheckBox
@@ -31,7 +31,7 @@
         android:layout_below="@id/configuration_bluetooth_toggle"
         android:layout_toEndOf="@id/configuration_bluetooth_checkBox"
         android:layout_margin="@dimen/dialog_padding"
-        android:text="Bonded Bluetooth Gadgets:"
+        android:text="@string/widget_bluetooth_boded_gadgets"
         />
 
     <LinearLayout
