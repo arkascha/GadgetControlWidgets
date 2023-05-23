@@ -4,38 +4,43 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/bluetoothWidget_verbose_gadgetContainer"
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:background="@drawable/gadget_shape"
+    android:layout_margin="@dimen/widget_margin"
+    android:padding="@dimen/widget_padding"
     android:theme="@style/CardView">
 
     <ImageView
         android:id="@+id/bluetoothWidget_verbose_gadgetIcon"
+        android:layout_alignParentStart="true"
         android:layout_centerVertical="true"
         android:layout_width="@dimen/icon_size"
         android:layout_height="@dimen/icon_size"
-        android:src="@mipmap/ic_launcher"
+        android:src="@drawable/ic_bluetooth"
         android:theme="@style/Theme.MaterialComponents"
         tools:ignore="ContentDescription" />
 
     <TextView
         android:id="@+id/bluetoothWidget_verbose_gadgetName"
         android:layout_toEndOf="@id/bluetoothWidget_verbose_gadgetIcon"
-        android:layout_alignTop="@id/bluetoothWidget_verbose_gadgetIcon"
-        android:layout_margin="4dp"
-        android:textSize="22dp"
+        android:layout_alignParentTop="true"
+        android:textSize="22sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="gadget name" />
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:text="@string/gadget_name_bluetooth_dummy" />
 
     <TextView
         android:id="@+id/bluetoothWidget_verbose_gadgetDescription"
         android:layout_toEndOf="@id/bluetoothWidget_verbose_gadgetIcon"
         android:layout_below="@id/bluetoothWidget_verbose_gadgetName"
-        android:layout_margin="4dp"
-        android:textSize="22dp"
+        android:textSize="22sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="gadget class" />
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:text="@string/bluetooth_service_dummy" />
 
 </RelativeLayout>

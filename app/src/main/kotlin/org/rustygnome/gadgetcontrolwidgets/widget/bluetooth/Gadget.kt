@@ -19,7 +19,7 @@ abstract class Gadget(
         }
 
     fun toVerboseRemoteViews(context: Context): RemoteViews =
-        RemoteViews(context.packageName, R.layout.bluetooth_gadget_compact).apply {
+        RemoteViews(context.packageName, R.layout.bluetooth_gadget_verbose).apply {
             setImageViewResource(R.id.bluetoothWidget_verbose_gadgetIcon, icon(context))
             setContentDescription(R.id.bluetoothWidget_verbose_gadgetIcon, description(context))
             setTextViewText(R.id.bluetoothWidget_verbose_gadgetName, name(context))

@@ -7,7 +7,8 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:background="@drawable/gadget_shape"
-    android:layout_margin="@dimen/card_margin"
+    android:layout_margin="@dimen/widget_margin"
+    android:padding="@dimen/widget_padding"
     android:theme="@style/CardView">
 
     <ImageView
@@ -16,7 +17,7 @@
         android:layout_centerVertical="true"
         android:layout_width="@dimen/icon_size"
         android:layout_height="@dimen/icon_size"
-        android:src="@mipmap/ic_launcher"
+        android:src="@drawable/ic_bluetooth"
         android:theme="@style/Theme.MaterialComponents"
         tools:ignore="ContentDescription" />
 

@@ -29,6 +29,7 @@
     <string name="introduction_usage_extro">"Auf dem Homescreen platzierte Widgets können geändert werden durch draufzeigen und halten, anschließend kann die Größe nach Bedarf verändert werden. Zusätzlich können jederzeit erneut die Einstellungen des Widgets geöffnen werden. Zum Entfernen des Widgets draufzeigen und halten, anschließend oben auf die Fläche \"Entfernen\" schieben. "</string>
 
     <string name="gadget_name_bluetooth_adapter">Adapter</string>
+    <string name="gadget_name_bluetooth_dummy">Flux capacitor</string>
 
     <string name="bluetooth_service_audio">Audio</string>
     <string name="bluetooth_service_capture">Capture</string>
@@ -40,5 +41,6 @@
     <string name="bluetooth_service_telephony">Telephony</string>
     <string name="bluetooth_service_unknown">-?-</string>
     <string name="bluetooth_service_adapter">Control, Pairing</string>
+    <string name="bluetooth_service_dummy">Time travel</string>
 
 </resources>

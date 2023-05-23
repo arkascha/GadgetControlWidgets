@@ -1,6 +1,6 @@
 <appwidget-provider
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:initialLayout="@layout/bluetooth_widget_vertical"
+    android:initialLayout="@layout/bluetooth_widget_vertical_compact"
     android:minWidth="@dimen/compact_size"
     android:minHeight="@dimen/compact_size"
     android:targetCellWidth="1"
@@ -10,5 +10,5 @@
     android:resizeMode="vertical"
     android:widgetCategory="keyguard|home_screen"
     android:widgetFeatures="reconfigurable|configuration_optional"
-    android:previewLayout="@layout/bluetooth_widget_vertical">
+    android:previewLayout="@layout/bluetooth_widget_vertical_compact">
 </appwidget-provider>

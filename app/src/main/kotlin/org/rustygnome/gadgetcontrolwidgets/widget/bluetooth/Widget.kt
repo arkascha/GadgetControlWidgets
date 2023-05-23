@@ -4,11 +4,11 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.widget.LinearLayout
 import android.widget.RemoteViews
-import androidx.annotation.IdRes
 import androidx.databinding.ViewDataBinding
 import org.rustygnome.gadgetcontrolwidgets.R
-import org.rustygnome.gadgetcontrolwidgets.databinding.BluetoothWidgetHorizontalBinding
-import org.rustygnome.gadgetcontrolwidgets.databinding.BluetoothWidgetVerticalBinding
+import org.rustygnome.gadgetcontrolwidgets.databinding.BluetoothWidgetHorizontalCompactBinding
+import org.rustygnome.gadgetcontrolwidgets.databinding.BluetoothWidgetVerticalCompactBinding
+import org.rustygnome.gadgetcontrolwidgets.databinding.BluetoothWidgetVerticalVerboseBinding
 import timber.log.Timber
 
 internal abstract class Widget(
@@ -58,31 +58,31 @@ internal abstract class Widget(
 
 internal class HorizontalCompactWidget(context: Context): Widget(
     context,
-    R.layout.bluetooth_widget_horizontal,
-    BluetoothWidgetHorizontalBinding.inflate(LayoutInflater.from(context)),
+    R.layout.bluetooth_widget_horizontal_compact,
+    BluetoothWidgetHorizontalCompactBinding.inflate(LayoutInflater.from(context)),
 ) {
     override fun getWidgetContainerView(): LinearLayout =
-        (binding as BluetoothWidgetHorizontalBinding).bluetoothWidgetGadgetListContainer
+        (binding as BluetoothWidgetHorizontalCompactBinding).bluetoothWidgetGadgetListContainer
     override fun gadgetToView(context: Context, gadget: Gadget): RemoteViews =
         gadget.toCompactRemoteViews(context)
 }
 internal class VerticalCompactWidget(context: Context): Widget(
     context,
-    R.layout.bluetooth_widget_vertical,
-    BluetoothWidgetVerticalBinding.inflate(LayoutInflater.from(context)),
+    R.layout.bluetooth_widget_vertical_compact,
+    BluetoothWidgetVerticalCompactBinding.inflate(LayoutInflater.from(context)),
 ) {
     override fun getWidgetContainerView(): LinearLayout =
-        (binding as BluetoothWidgetVerticalBinding).bluetoothWidgetGadgetListContainer
+        (binding as BluetoothWidgetVerticalCompactBinding).bluetoothWidgetGadgetListContainer
     override fun gadgetToView(context: Context, gadget: Gadget): RemoteViews =
         gadget.toCompactRemoteViews(context)
 }
 internal class VerticalVerboseWidget(context: Context): Widget(
     context,
-    R.layout.bluetooth_widget_vertical,
-    BluetoothWidgetVerticalBinding.inflate(LayoutInflater.from(context)),
+    R.layout.bluetooth_widget_vertical_verbose,
+    BluetoothWidgetVerticalVerboseBinding.inflate(LayoutInflater.from(context)),
 ) {
     override fun getWidgetContainerView(): LinearLayout =
-        (binding as BluetoothWidgetVerticalBinding).bluetoothWidgetGadgetListContainer
+        (binding as BluetoothWidgetVerticalVerboseBinding).bluetoothWidgetGadgetListContainer
     override fun gadgetToView(context: Context, gadget: Gadget): RemoteViews =
         gadget.toVerboseRemoteViews(context)
 }

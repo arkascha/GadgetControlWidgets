@@ -12,8 +12,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
+            android:padding="@dimen/widget_padding"
             android:scrollbars="horizontal"
-            android:theme="@android:style/Theme.DeviceDefault.DayNight" />
+            android:theme="@android:style/Theme.DeviceDefault.DayNight">
+
+            <include layout="@layout/bluetooth_gadget_compact" />
+            <include layout="@layout/bluetooth_gadget_compact" />
+            <include layout="@layout/bluetooth_gadget_compact" />
+
+        </LinearLayout>
 
     </LinearLayout>
 
