@@ -5,7 +5,7 @@
     <string name="configuration_done">Done</string>
 
     <string name="widget_bluetooth_description">Bluetooth Gadgets</string>
-    <string name="widget_bluetooth_boded_gadgets">Aktuell bekannte Bluetooth Gadgets:</string>
+    <string name="widget_bluetooth_boded_gadgets">Currently known Bluetooth Gadgets:</string>
     <string name="widget_bluetooth_mode_description">Whitelist / Blacklist</string>
     <string name="widget_bluetooth_gadgets_vertical_verbose">Vertical, verbose</string>
     <string name="widget_bluetooth_gadgets_vertical_compact">Vertical, compact</string>
@@ -13,25 +13,24 @@
 
     <string name="configure">Configure</string>
     <string name="add_widget">Add widget</string>
-    <string name="bluetooth_configuration_currently_known_gadgets">Aktuell bekannte Bluetooth Gadgets</string>
 
-    <string name="permissions_activity_button_text_grant">Zulassen</string>
-    <string name="permissions_activity_welcome_message">Dieses Widget benötigt die Berechtigung zum Zugriff auf Gadgets: </string>
-    <string name="permissions_activity_denial_message">Ohne diese Berechtigungen kann das Widget nicht genutzt werden, da Android die notwendigen Zugriffe blockiert.</string>
-    <string name="permission_activity_explanation_message">Um auf die System bekannten Bluetooth-Gadgets auflisten zu können wird Zugriff auf die zentrale Bluetooth-Verwaltung in Android benötigt. Dazu sind diese konkreten Berechtigungen erforderlich:</string>
+    <string name="permissions_activity_button_text_grant">Grant</string>
+    <string name="permissions_activity_welcome_message">This widget requires permissions to access the Gadgets:</string>
+    <string name="permissions_activity_denial_message">Without these permissions the widget cannot be used, since the system blocks the required access.</string>
+    <string name="permission_activity_explanation_message">To list the gadgets that have been registered to the system access to the central Bluetooth administration is required. For that these specific permissions are required:</string>
 
-    <string name="introduction_overview">"Diese App bietet Widgets, die eine Vereinfachung bieten sollen um schnell auf Gadgets zugreifen zu können, die normalerweise tiefer in den Einstellungen erreichbar sind."</string>
-    <string name="introduction_usage_intro">"Diese Widgets können dem Homescreen ihres Geräts hinzugefügt werden."</string>
-    <string name="introduction_usage_toggle">"Anleitung"</string>
+    <string name="introduction_overview">"This app offers a simplified access to gadgets registered in the system. Usually that access is buried somewhere deep inside the system\'s configuration ."</string>
+    <string name="introduction_usage_intro">"These widgets can be added to your device\'s home screen."</string>
+    <string name="introduction_usage_toggle">"HowTo"</string>
     <string-array name="introduction_usage_steps">
-        <item>Berühren und halten einer freien Fläche auf dem Homescreen.</item>
-        <item>In dem sich öffnenden Kontext-Menü \"Widgets\" auswählen".</item>
-        <item>In der Liste der installierten Widgets die Gruppe \"Gadget Control Widgets\" öffnen.</item>
-        <item>Auf eines der dort angebotenen Widgets zeigen, halten und auf einen noch freien Bereich auf einem Homescreen schieben.</item>
-        <item>Die erforderlichen Berechtigungen für das Widget bestätigen.</item>
-        <item>Bei Bedarf die genauen Einstellungen des Widgets konfigurieren.</item>
+        <item>Touch and hold a free area on your home screen.</item>
+        <item>Select \"Widgets\" in the opening context menu.</item>
+        <item>Open the group \"Gadget Control Widgets\" in the list of available widgets.</item>
+        <item>Point onto one of the offered widgets and move it to a free area on your home screen.</item>
+        <item>You will have to confirm the permissions requested by the widget.</item>
+        <item>Detailed settings can be chosen inside the widget\'s configuration.</item>
     </string-array>
-    <string name="introduction_usage_extro">"Auf dem Homescreen platzierte Widgets können geändert werden durch draufzeigen und halten, anschließend kann die Größe nach Bedarf verändert werden. Zusätzlich können jederzeit erneut die Einstellungen des Widgets geöffnen werden. Zum Entfernen des Widgets draufzeigen und halten, anschließend oben auf die Fläche \"Entfernen\" schieben. "</string>
+    <string name="introduction_usage_extro">"Widgets placed on the home screen can be modified by pressing als holding then. Following that they can be moved and resized. Also the configuration can be opened anytime. To remove a widget you simply drag it to the target "Remove" atop the home screen. "</string>
 
     <string name="gadget_name_bluetooth_adapter">Adapter</string>
     <string name="gadget_name_bluetooth_dummy">Flux capacitor</string>
