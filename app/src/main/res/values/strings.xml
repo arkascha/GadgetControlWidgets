@@ -16,7 +16,7 @@
 
     <string name="permissions_activity_button_text_grant">Grant</string>
     <string name="permissions_activity_welcome_message">This widget requires permissions to access the Gadgets:</string>
-    <string name="permissions_activity_denial_message">Without these permissions the widget cannot be used, since the system blocks the required access.</string>
+    <string name="permissions_activity_denial_message">Without these permissions this widget cannot be used, since the system blocks the required access.\nTo be able to use this widget you will have to manually grant the missing permissions in the app\'s section of the system configuration.</string>
     <string name="permission_activity_explanation_message">To list the gadgets that have been registered to the system access to the central Bluetooth administration is required. For that these specific permissions are required:</string>
 
     <string name="introduction_overview">"This app offers a simplified access to gadgets registered in the system. Usually that access is buried somewhere deep inside the system\'s configuration ."</string>
@@ -30,7 +30,7 @@
         <item>You will have to confirm the permissions requested by the widget.</item>
         <item>Detailed settings can be chosen inside the widget\'s configuration.</item>
     </string-array>
-    <string name="introduction_usage_extro">"Widgets placed on the home screen can be modified by pressing als holding then. Following that they can be moved and resized. Also the configuration can be opened anytime. To remove a widget you simply drag it to the target "Remove" atop the home screen. "</string>
+    <string name="introduction_usage_extro">"Widgets placed on the home screen can be modified, use a long press for that. They can be moved, resized and you can open their configuration. To remove a widget you simply drag it to the target "Remove" atop the home screen. "</string>
 
     <string name="gadget_name_bluetooth_adapter">Adapter</string>
     <string name="gadget_name_bluetooth_dummy">Flux capacitor</string>

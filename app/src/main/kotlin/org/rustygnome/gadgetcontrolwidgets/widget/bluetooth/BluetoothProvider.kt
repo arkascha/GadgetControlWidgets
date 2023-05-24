@@ -2,7 +2,6 @@ package org.rustygnome.gadgetcontrolwidgets.widget.bluetooth
 
 import android.appwidget.AppWidgetManager
 import android.appwidget.AppWidgetProvider
-import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import org.rustygnome.gadgetcontrolwidgets.App

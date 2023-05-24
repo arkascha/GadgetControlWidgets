@@ -4,6 +4,7 @@
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
+    <uses-permission android:name="android.permission.BLUETOOTH_SCAN" />
 
     <uses-feature
         android:name="android.hardware.bluetooth_le"
@@ -61,7 +62,7 @@
         </receiver>
 
         <activity
-            android:name=".introduction.Activity"
+            android:name=".introduction.IntroductionActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -85,7 +86,7 @@
         </activity>
 
         <activity
-            android:name=".permissions.Activity"
+            android:name=".permissions.PermissionsActivity"
             android:exported="false">
         </activity>
 

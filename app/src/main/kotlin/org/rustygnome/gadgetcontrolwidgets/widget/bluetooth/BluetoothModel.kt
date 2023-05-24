@@ -28,7 +28,6 @@ class Model private constructor (
 
         fun setup(context: Context) {
             Timber.v("> setup()")
-//            ensureRequiredPermissions(context, REQUIRED_PERMISSIONS)
             _instance = Model(
                 bluetoothManager = context.getSystemService(Application.BLUETOOTH_SERVICE) as BluetoothManager,
                 sharedPreferences = context.getSharedPreferences(sharedPreferencesName, MODE_PRIVATE),
@@ -37,12 +36,13 @@ class Model private constructor (
     }
 
     internal fun getListOfGadgets(context: Context): List<Gadget> {
+        Timber.v("> getListOfGadgets()")
         ensureRequiredPermissions(context, REQUIRED_PERMISSIONS)
+
         return mutableListOf<Gadget>().apply {
-            Timber.v("> getListOfGadgets()")
             try {
                 // this devices bluetooth adapter itself
-                add(0, Adapter())
+                add(0, Adapter(bluetoothManager.adapter))
                 // all gadgets currently bonded to this device's bluetooth adapter
                 bluetoothManager.adapter.bondedDevices.forEach {
                     add(Device(it))

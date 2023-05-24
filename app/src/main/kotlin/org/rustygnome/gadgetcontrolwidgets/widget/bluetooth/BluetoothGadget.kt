@@ -1,17 +1,26 @@
 package org.rustygnome.gadgetcontrolwidgets.widget.bluetooth
 
 import android.annotation.SuppressLint
+import android.bluetooth.BluetoothAdapter
 import android.bluetooth.BluetoothClass
 import android.bluetooth.BluetoothDevice
+import android.bluetooth.BluetoothDevice.BOND_BONDED
+import android.bluetooth.BluetoothDevice.BOND_BONDING
 import android.content.Context
 import android.widget.RemoteViews
 import org.rustygnome.gadgetcontrolwidgets.R
-import org.rustygnome.gadgetcontrolwidgets.configuration.Item
 import timber.log.Timber
 
 abstract class Gadget(
     val tag: String
 ) {
+    abstract fun name(context: Context): String
+    abstract fun description(context: Context): String
+    abstract fun services(context: Context): String
+    abstract fun icon(context: Context): Int
+    abstract fun isEnabled(): Boolean
+    abstract fun isBusy(): Boolean
+
     fun toCompactRemoteViews(context: Context): RemoteViews =
         RemoteViews(context.packageName, R.layout.bluetooth_gadget_compact).apply {
             setImageViewResource(R.id.bluetoothWidget_compact_gadgetIcon, icon(context))
@@ -25,14 +34,12 @@ abstract class Gadget(
             setTextViewText(R.id.bluetoothWidget_verbose_gadgetName, name(context))
             setTextViewText(R.id.bluetoothWidget_verbose_gadgetDescription, services(context))
         }
-
-    abstract fun name(context: Context): String
-    abstract fun description(context: Context): String
-    abstract fun services(context: Context): String
-    abstract fun icon(context: Context): Int
 }
 
-class Adapter: Gadget("Adapter") {
+@SuppressLint("MissingPermission")
+class Adapter(
+    private val device: BluetoothAdapter,
+): Gadget(device.name) {
     override fun name(context: Context): String =
         context.getString(R.string.gadget_name_bluetooth_adapter)
     override fun description(context: Context): String =
@@ -41,12 +48,18 @@ class Adapter: Gadget("Adapter") {
         context.getString(R.string.bluetooth_service_adapter)
     override fun icon(context: Context): Int =
         R.drawable.ic_bluetooth
+    @SuppressLint("MissingPermission")
+    override fun isEnabled(): Boolean =
+        device.isEnabled
+    @SuppressLint("MissingPermission")
+    override fun isBusy() =
+        device.isDiscovering
 }
 
 @SuppressLint("MissingPermission")
-open class Device(
-    private val device: BluetoothDevice
-) : Gadget(device.name) {
+class Device(
+    private val device: BluetoothDevice,
+): Gadget(device.name) {
 
     init {
         Timber.d("> init(${device.name})")
@@ -63,13 +76,13 @@ open class Device(
 
     override fun services(context: Context): String =
         mutableListOf<String>().apply {
-            Service.map.forEach { (service, name) ->
+            BluetoothService.map.forEach { (service, name) ->
                 if (device.bluetoothClass.hasService(service)) {
                     add(context.getString(name))
                 }
             }
         }.run {
-            return if (isNotEmpty()) joinToString(", ") else context.getString(Service.unknown)
+            return if (isNotEmpty()) joinToString(", ") else context.getString(BluetoothService.unknown)
         }
 
     override fun icon(context: Context): Int =
@@ -98,4 +111,9 @@ open class Device(
         else if (device.bluetoothClass.majorDeviceClass.equals(BluetoothClass.Device.Major.MISC))
             R.drawable.ic_device_misc
         else R.drawable.ic_unknown
+
+    override fun isEnabled(): Boolean =
+        device.bondState == BOND_BONDED
+    override fun isBusy() =
+        device.bondState == BOND_BONDING
 }

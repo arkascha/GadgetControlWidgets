@@ -19,17 +19,17 @@ import timber.log.Timber
 class HorizontalCompactBluetoothActivity: Activity(
     provider = ProviderCompactHorizontal::class.java,
     fragmentTitle = R.string.widget_bluetooth_description,
-    fragment = { Bluetooth() }
+    fragment = { BluetoothConfigurationFragment() }
 )
 class VerticalCompactBluetoothActivity: Activity(
     provider = ProviderCompactHorizontal::class.java,
     fragmentTitle = R.string.widget_bluetooth_description,
-    fragment = { Bluetooth() }
+    fragment = { BluetoothConfigurationFragment() }
 )
 class VerticalVerboseBluetoothActivity: Activity(
     provider = ProviderCompactHorizontal::class.java,
     fragmentTitle = R.string.widget_bluetooth_description,
-    fragment = { Bluetooth() }
+    fragment = { BluetoothConfigurationFragment() }
 )
 
 open class Activity(

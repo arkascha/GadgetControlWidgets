@@ -1,19 +1,17 @@
 package org.rustygnome.gadgetcontrolwidgets.introduction
 
 import android.os.Bundle
-import android.text.SpannableString
-import android.text.style.BulletSpan
 import android.view.View
-import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import org.rustygnome.gadgetcontrolwidgets.R
 import org.rustygnome.gadgetcontrolwidgets.databinding.IntroductionBinding
+import org.rustygnome.gadgetcontrolwidgets.extension.string.firstCharToUpperCase
+import org.rustygnome.gadgetcontrolwidgets.extension.string.addItemsAsBulletList
 import timber.log.Timber
 
-class Activity: AppCompatActivity() {
+class IntroductionActivity: AppCompatActivity() {
 
     private lateinit var binding: IntroductionBinding
 
@@ -38,20 +36,10 @@ class Activity: AppCompatActivity() {
     }
 
     private fun initUsageSteps() {
-        resources.getStringArray(R.array.introduction_usage_steps).also {
-            it.forEach { step ->
-                with(binding.introductionUsageSteps as ViewGroup) {
-                    TextView(context).apply {
-                        text = SpannableString(step).apply {
-                            setSpan(BulletSpan(15), 0, step.length, 0)
-                        }
-                        setTextAppearance(R.style.Theme_GadgetControlWidgets_TextAppearance)
-                    }.also{
-                        addView(it)
-                    }
-                }
-            }
-        }
+        binding.introductionUsageSteps.addItemsAsBulletList(
+            resources.getStringArray(R.array.introduction_usage_steps)
+                .map { it.firstCharToUpperCase() }
+        )
     }
 
     private fun initToggleUsageVisibility() =

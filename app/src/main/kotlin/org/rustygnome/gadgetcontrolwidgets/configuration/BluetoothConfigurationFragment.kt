@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import android.widget.CheckBox
 import androidx.core.view.children
 import androidx.core.view.forEach
-import androidx.fragment.app.Fragment
 import org.rustygnome.gadgetcontrolwidgets.R
 import org.rustygnome.gadgetcontrolwidgets.databinding.ConfigurationBluetoothBinding
 import org.rustygnome.gadgetcontrolwidgets.ensureRequiredPermissions
@@ -15,7 +14,7 @@ import org.rustygnome.gadgetcontrolwidgets.widget.bluetooth.Model
 import org.rustygnome.gadgetcontrolwidgets.widget.bluetooth.REQUIRED_PERMISSIONS
 import timber.log.Timber
 
-class Bluetooth: Fragment() {
+class BluetoothConfigurationFragment: ConfigurationFragment() {
 
     private lateinit var binding: ConfigurationBluetoothBinding
 
@@ -50,7 +49,7 @@ class Bluetooth: Fragment() {
             requireContext().also {
                 Model.instance.getListOfGadgets(it).forEach { gadget ->
                     addView(
-                        Item(gadget) {
+                        ConfigurationItem(gadget) {
                             storeSetOfCheckedGadgets()
                         }.toConfigurationView(it)
                     )

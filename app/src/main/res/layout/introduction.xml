@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".introduction.Activity">
+    tools:context=".introduction.IntroductionActivity">
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -56,6 +56,7 @@
                 android:justificationMode="inter_word"
                 android:orientation="vertical"
                 android:paddingStart="@dimen/dialog_padding"
+                android:paddingEnd="@dimen/dialog_padding"
                 android:textAppearance="@style/Theme.GadgetControlWidgets.TextAppearance"
                 android:visibility="gone" />
 

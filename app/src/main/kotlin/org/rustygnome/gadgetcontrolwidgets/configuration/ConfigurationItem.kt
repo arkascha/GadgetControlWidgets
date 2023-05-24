@@ -7,7 +7,7 @@ import org.rustygnome.gadgetcontrolwidgets.databinding.BluetoothGadgetItemBindin
 import org.rustygnome.gadgetcontrolwidgets.widget.bluetooth.Gadget
 import org.rustygnome.gadgetcontrolwidgets.widget.bluetooth.Model
 
-class Item(
+class ConfigurationItem(
     private val device: Gadget,
     private val onCheckedListener: (View) -> Unit,
 ) {

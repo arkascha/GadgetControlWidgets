@@ -3,7 +3,7 @@ package org.rustygnome.gadgetcontrolwidgets.widget.bluetooth
 import android.bluetooth.BluetoothClass.Service
 import org.rustygnome.gadgetcontrolwidgets.R
 
-class Service {
+class BluetoothService {
     companion object {
         /**
          * map does NOT contain the entries RENDER and LIMITED_DISCOVERABILITY, no interest in those.

@@ -1,15 +1,8 @@
 package org.rustygnome.gadgetcontrolwidgets.widget.bluetooth
 
-import android.appwidget.AppWidgetManager
-import android.bluetooth.BluetoothAdapter
 import android.content.BroadcastReceiver
-import android.content.ComponentName
-import android.content.Context
-import android.content.Intent
-import org.rustygnome.gadgetcontrolwidgets.App
-import timber.log.Timber
 
-abstract class Receiver : BroadcastReceiver() {
+abstract class BluetoothReceiver : BroadcastReceiver() {
 
 //    override fun onReceive(context: Context, intent: Intent) {
 //        App.initLogging()
