@@ -12,7 +12,7 @@ import timber.log.Timber
 const val MODE_BLACKLIST = false
 const val CHECKED_GADGETS = "checked gadgets"
 
-class Model private constructor (
+class BluetoothModel private constructor (
     private val bluetoothManager: BluetoothManager,
     private val sharedPreferences: SharedPreferences,
 ): ViewModel() {
@@ -23,21 +23,20 @@ class Model private constructor (
 
     companion object {
         private val sharedPreferencesName = Companion::class.java.name
-        private lateinit var _instance: Model
-        val instance: Model get() = _instance
+        private lateinit var _instance: BluetoothModel
+        val instance: BluetoothModel get() = _instance
 
         fun setup(context: Context) {
             Timber.v("> setup()")
-            _instance = Model(
+            _instance = BluetoothModel(
                 bluetoothManager = context.getSystemService(Application.BLUETOOTH_SERVICE) as BluetoothManager,
                 sharedPreferences = context.getSharedPreferences(sharedPreferencesName, MODE_PRIVATE),
             )
         }
     }
 
-    internal fun getListOfGadgets(context: Context): List<Gadget> {
+    internal fun getListOfGadgets(): List<Gadget> {
         Timber.v("> getListOfGadgets()")
-        ensureRequiredPermissions(context, REQUIRED_PERMISSIONS)
 
         return mutableListOf<Gadget>().apply {
             try {

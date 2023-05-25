@@ -1,4 +1,4 @@
-package org.rustygnome.gadgetcontrolwidgets.configuration
+package org.rustygnome.gadgetcontrolwidgets.configuration.bluetooth
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,10 +8,10 @@ import android.widget.CheckBox
 import androidx.core.view.children
 import androidx.core.view.forEach
 import org.rustygnome.gadgetcontrolwidgets.R
+import org.rustygnome.gadgetcontrolwidgets.configuration.ConfigurationFragment
+import org.rustygnome.gadgetcontrolwidgets.configuration.ConfigurationItem
 import org.rustygnome.gadgetcontrolwidgets.databinding.ConfigurationBluetoothBinding
-import org.rustygnome.gadgetcontrolwidgets.ensureRequiredPermissions
-import org.rustygnome.gadgetcontrolwidgets.widget.bluetooth.Model
-import org.rustygnome.gadgetcontrolwidgets.widget.bluetooth.REQUIRED_PERMISSIONS
+import org.rustygnome.gadgetcontrolwidgets.widget.bluetooth.BluetoothModel
 import timber.log.Timber
 
 class BluetoothConfigurationFragment: ConfigurationFragment() {
@@ -26,12 +26,13 @@ class BluetoothConfigurationFragment: ConfigurationFragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         super.onCreateView(inflater, container, savedInstanceState)
         Timber.v("> onCreateView()")
-        ensureRequiredPermissions(requireContext(), REQUIRED_PERMISSIONS)
         ConfigurationBluetoothBinding.inflate(inflater,container,false).also {
             binding = it
         }
         return binding.root
     }
+
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         Timber.v("> onViewCreated()")
@@ -46,14 +47,12 @@ class BluetoothConfigurationFragment: ConfigurationFragment() {
             // first remove _all_ gadgets
             this.removeAllViewsInLayout()
             // add available gadgets
-            requireContext().also {
-                Model.instance.getListOfGadgets(it).forEach { gadget ->
-                    addView(
-                        ConfigurationItem(gadget) {
-                            storeSetOfCheckedGadgets()
-                        }.toConfigurationView(it)
-                    )
-                }
+            BluetoothModel.instance.getListOfGadgets().forEach { gadget ->
+                addView(
+                    ConfigurationItem(gadget) {
+                        storeSetOfCheckedGadgets()
+                    }.toConfigurationView(requireContext())
+                )
             }
         }
     }
@@ -81,7 +80,7 @@ class BluetoothConfigurationFragment: ConfigurationFragment() {
                 }
             }
         }.also {
-            Model.instance.writeSetOfCheckedGadgetNames(it)
+            BluetoothModel.instance.writeSetOfCheckedGadgetNames(it)
         }
     }
 

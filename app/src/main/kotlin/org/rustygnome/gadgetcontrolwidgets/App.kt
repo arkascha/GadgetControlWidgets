@@ -1,7 +1,7 @@
 package org.rustygnome.gadgetcontrolwidgets
 
 import android.app.Application
-import org.rustygnome.gadgetcontrolwidgets.widget.bluetooth.Model
+import org.rustygnome.gadgetcontrolwidgets.widget.bluetooth.BluetoothModel
 import timber.log.Timber
 
 class App: Application() {
@@ -10,7 +10,7 @@ class App: Application() {
         super.onCreate()
         initLogging()
         Timber.d("> onCreate()")
-        Model.setup(applicationContext)
+        BluetoothModel.setup(applicationContext)
     }
 
     companion object {

@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import org.rustygnome.gadgetcontrolwidgets.databinding.BluetoothGadgetItemBinding
 import org.rustygnome.gadgetcontrolwidgets.widget.bluetooth.Gadget
-import org.rustygnome.gadgetcontrolwidgets.widget.bluetooth.Model
+import org.rustygnome.gadgetcontrolwidgets.widget.bluetooth.BluetoothModel
 
 class ConfigurationItem(
     private val device: Gadget,
@@ -28,5 +28,5 @@ class ConfigurationItem(
         }.root
 
     private fun isItemChecked(): Boolean =
-        Model.instance.readSetOfCheckedGadgetNames().contains(device.tag)
+        BluetoothModel.instance.readSetOfCheckedGadgetNames().contains(device.tag)
 }

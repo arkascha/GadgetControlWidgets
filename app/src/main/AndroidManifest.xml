@@ -71,17 +71,17 @@
         </activity>
 
         <activity
-            android:name=".configuration.HorizontalCompactBluetoothActivity"
+            android:name=".configuration.bluetooth.HorizontalCompactBluetoothActivity"
             android:exported="true">
         </activity>
 
         <activity
-            android:name=".configuration.VerticalCompactBluetoothActivity"
+            android:name=".configuration.bluetooth.VerticalCompactBluetoothActivity"
             android:exported="false">
         </activity>
 
         <activity
-            android:name=".configuration.VerticalVerboseBluetoothActivity"
+            android:name=".configuration.bluetooth.VerticalVerboseBluetoothActivity"
             android:exported="false">
         </activity>
 

@@ -48,7 +48,7 @@ abstract class Provider : AppWidgetProvider() {
         App.initLogging()
         Timber.v("> onUpdate()")
 
-        Model.setup(context)
+        BluetoothModel.setup(context)
 
         for (appWidgetId in appWidgetIds) {
             Timber.i("Updating widget with id $appWidgetId ...")

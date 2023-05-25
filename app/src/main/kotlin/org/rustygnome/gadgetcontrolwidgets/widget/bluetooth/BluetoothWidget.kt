@@ -35,10 +35,10 @@ internal abstract class Widget(
 
     private fun initializeGadgetViews(context: Context) {
         Timber.v("> initializeGadgetViews()")
-        val setOfCheckedGadgetNames = Model.instance.readSetOfCheckedGadgetNames()
+        val setOfCheckedGadgetNames = BluetoothModel.instance.readSetOfCheckedGadgetNames()
         getWidgetContainerView().apply {
             removeAllViews(getWidgetContainerView().id)
-            Model.instance.getListOfGadgets(context).filter {
+            BluetoothModel.instance.getListOfGadgets().filter {
                 setOfCheckedGadgetNames.contains(it.name(context))
             }.forEachIndexed { index, gadget ->
                 run {

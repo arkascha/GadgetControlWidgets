@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="@dimen/dialog_padding"
-    tools:context=".configuration.Activity">
+    tools:context=".configuration.ConfigurationActivity">
 
     <TextView
         android:id="@+id/configuration_fragmentTitle"
@@ -32,5 +32,12 @@
         android:layout_below="@id/configuration_fragmentTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
+
+    <include
+        layout="@layout/layout_denied_permissions_state"
+        android:id="@+id/deniedPermissionsState"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/configuration_doneButton" />
 
 </RelativeLayout>

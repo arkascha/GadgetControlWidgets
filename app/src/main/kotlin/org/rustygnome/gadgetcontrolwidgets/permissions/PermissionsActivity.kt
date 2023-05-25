@@ -33,7 +33,7 @@ class PermissionsActivity: AppCompatActivity() {
                 Timber.i("Not granted, but required permissions: ${it.keys.joinToString(", ")}.")
                 setResult(RESULT_CANCELED)
                 binding.permissionsButtonGrant.visibility = GONE
-                binding.permissionsDenialContainer.visibility = VISIBLE
+                binding.deniedPermissionsState.deniedPermissionsStateContainer.visibility = VISIBLE
             }
         }
     }
@@ -55,7 +55,7 @@ class PermissionsActivity: AppCompatActivity() {
             setContentView(it.root)
         }.run {
             permissionsButtonGrant.setOnClickListener { launchRequestPermissionsDialog() }
-            permissionsButtonOK.setOnClickListener { finish() }
+            deniedPermissionsState.permissionsButtonOK.setOnClickListener { finish() }
         }
         requestRequiredPermissions()
     }

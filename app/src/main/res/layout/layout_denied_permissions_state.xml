@@ -1,0 +1,26 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout
+        android:id="@+id/deniedPermissionsState_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="invisible">
+
+        <TextView
+            android:id="@+id/permissions_denialMessage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/permissions_activity_denial_message"/>
+
+        <Button
+            android:id="@+id/permissions_buttonOK"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_margin="@dimen/dialog_padding"
+            android:text="@string/permissions_activity_button_label_ok" />
+
+    </LinearLayout>
+
+</layout>
