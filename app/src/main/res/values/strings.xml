@@ -14,9 +14,10 @@
     <string name="configure">Configure</string>
     <string name="add_widget">Add widget</string>
 
-    <string name="permissions_activity_button_text_grant">Grant</string>
+    <string name="permissions_activity_button_label_ok">OK</string>
+    <string name="permissions_activity_button_label_grant">Grant</string>
     <string name="permissions_activity_welcome_message">This widget requires permissions to access the Gadgets:</string>
-    <string name="permissions_activity_denial_message">Without these permissions this widget cannot be used, since the system blocks the required access.\nTo be able to use this widget you will have to manually grant the missing permissions in the app\'s section of the system configuration.</string>
+    <string name="permissions_activity_denial_message">Without these permissions this widget cannot be used, since the system blocks the required access to the gadgets.\nTo be able to use this widget you will have to manually grant the missing permissions in the app\'s section of the system configuration.</string>
     <string name="permission_activity_explanation_message">To list the gadgets that have been registered to the system access to the central Bluetooth administration is required. For that these specific permissions are required:</string>
 
     <string name="introduction_overview">"This app offers a simplified access to gadgets registered in the system. Usually that access is buried somewhere deep inside the system\'s configuration ."</string>

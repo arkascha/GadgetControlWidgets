@@ -31,8 +31,9 @@ class PermissionsActivity: AppCompatActivity() {
                 finish()
             } else {
                 Timber.i("Not granted, but required permissions: ${it.keys.joinToString(", ")}.")
-                binding.permissionsButtonToGrant.visibility = GONE
-                binding.permissionsDenialMessage.visibility = VISIBLE
+                setResult(RESULT_CANCELED)
+                binding.permissionsButtonGrant.visibility = GONE
+                binding.permissionsDenialContainer.visibility = VISIBLE
             }
         }
     }
@@ -52,9 +53,9 @@ class PermissionsActivity: AppCompatActivity() {
         PermissionsBinding.inflate(layoutInflater).also {
             _binding = it
             setContentView(it.root)
-        }
-        binding.permissionsButtonToGrant.setOnClickListener {
-            launchRequestPermissionsDialog()
+        }.run {
+            permissionsButtonGrant.setOnClickListener { launchRequestPermissionsDialog() }
+            permissionsButtonOK.setOnClickListener { finish() }
         }
         requestRequiredPermissions()
     }
@@ -82,7 +83,7 @@ class PermissionsActivity: AppCompatActivity() {
                 } else {
                     Timber.d("Required, but not yet granted permission(s) '${it.joinToString("', '")}' not yet granted...")
                     explainRequiredPermissions(it)
-                    binding.permissionsButtonToGrant.visibility = VISIBLE
+                    binding.permissionsButtonGrant.visibility = VISIBLE
                 }
             }
     }
