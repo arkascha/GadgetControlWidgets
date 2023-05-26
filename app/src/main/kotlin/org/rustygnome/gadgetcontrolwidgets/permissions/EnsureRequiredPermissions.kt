@@ -24,7 +24,7 @@ fun ensureRequiredPermissions(
 
             context.registerForActivityResult(
                 ActivityResultContracts.StartActivityForResult(),
-                resultCallback
+                resultCallback,
             ).apply {
 
                 if (it.isEmpty()) {

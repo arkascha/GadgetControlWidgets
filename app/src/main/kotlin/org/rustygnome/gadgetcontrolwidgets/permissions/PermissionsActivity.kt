@@ -1,5 +1,6 @@
 package org.rustygnome.gadgetcontrolwidgets.permissions
 
+import android.content.Intent
 import android.content.pm.PackageManager.GET_META_DATA
 import android.content.pm.PackageManager.PERMISSION_GRANTED
 import android.os.Bundle
@@ -31,7 +32,9 @@ class PermissionsActivity: AppCompatActivity() {
                 finish()
             } else {
                 Timber.i("Not granted, but required permissions: ${it.keys.joinToString(", ")}.")
-                setResult(RESULT_CANCELED)
+                setResult(RESULT_CANCELED, Intent().apply {
+                    putStringArrayListExtra(INTENT_EXTRA_KEY_PERMISSIONS, arrayListOf(*it.keys.toTypedArray()))
+                })
                 binding.permissionsButtonGrant.visibility = GONE
                 binding.deniedPermissionsState.deniedPermissionsStateContainer.visibility = VISIBLE
             }
@@ -81,7 +84,7 @@ class PermissionsActivity: AppCompatActivity() {
                     setResult(RESULT_OK)
                     finish()
                 } else {
-                    Timber.d("Required, but not yet granted permission(s) '${it.joinToString("', '")}' not yet granted...")
+                    Timber.d("Required, but not yet granted permission(s): ${it.joinToString(", ")} ...")
                     explainRequiredPermissions(it)
                     binding.permissionsButtonGrant.visibility = VISIBLE
                 }

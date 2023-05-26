@@ -6,7 +6,6 @@ import android.content.Context
 import android.content.Context.MODE_PRIVATE
 import android.content.SharedPreferences
 import androidx.lifecycle.ViewModel
-import org.rustygnome.gadgetcontrolwidgets.ensureRequiredPermissions
 import timber.log.Timber
 
 const val MODE_BLACKLIST = false

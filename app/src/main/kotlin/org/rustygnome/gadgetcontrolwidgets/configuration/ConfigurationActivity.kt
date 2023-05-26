@@ -11,13 +11,11 @@ import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import org.rustygnome.gadgetcontrolwidgets.App
-import org.rustygnome.gadgetcontrolwidgets.R
 import org.rustygnome.gadgetcontrolwidgets.databinding.ConfigurationBinding
 import org.rustygnome.gadgetcontrolwidgets.ensureRequiredPermissions
+import org.rustygnome.gadgetcontrolwidgets.permissions.INTENT_EXTRA_KEY_PERMISSIONS
 import org.rustygnome.gadgetcontrolwidgets.widget.bluetooth.BluetoothModel
 import org.rustygnome.gadgetcontrolwidgets.widget.bluetooth.Provider
-import org.rustygnome.gadgetcontrolwidgets.widget.bluetooth.ProviderCompactHorizontal
-import org.rustygnome.gadgetcontrolwidgets.widget.bluetooth.BLUETOOTH_REQUIRED_PERMISSIONS
 import timber.log.Timber
 
 abstract class ConfigurationActivity(
@@ -70,8 +68,15 @@ abstract class ConfigurationActivity(
                     }
 
                     else -> {
-                        Timber.w("Required permissions are NOT ensured.")
-                        explaineDeniedPermissionState()
+                        result.data?.run {
+                            getStringArrayExtra(INTENT_EXTRA_KEY_PERMISSIONS).also {
+                                Timber.w("Required permissions are NOT ensured: ${it?.joinToString(", ")}")
+                                // TODO: visualize missing permissions
+                            }
+                        } ?: {
+                            Timber.w("Required permissions are NOT ensured.")
+                        }
+                        explainDeniedPermissionState()
                     }
                 }
             }
@@ -94,7 +99,7 @@ abstract class ConfigurationActivity(
         }
     }
 
-    protected fun explaineDeniedPermissionState() {
+    private fun explainDeniedPermissionState() {
         binding.deniedPermissionsState.deniedPermissionsStateContainer.visibility = VISIBLE
     }
 
