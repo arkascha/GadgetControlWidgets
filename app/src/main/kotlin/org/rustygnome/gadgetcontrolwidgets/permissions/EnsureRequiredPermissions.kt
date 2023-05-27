@@ -1,4 +1,4 @@
-package org.rustygnome.gadgetcontrolwidgets
+package org.rustygnome.gadgetcontrolwidgets.permissions
 
 import android.content.Intent
 import androidx.activity.result.ActivityResult
@@ -8,8 +8,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.PermissionChecker
 import androidx.core.content.PermissionChecker.PERMISSION_GRANTED
 import org.rustygnome.gadgetcontrolwidgets.configuration.INTENT_ACTION_PERMISSION_REQUEST
-import org.rustygnome.gadgetcontrolwidgets.permissions.INTENT_EXTRA_KEY_PERMISSIONS
-import org.rustygnome.gadgetcontrolwidgets.permissions.PermissionsActivity
 import timber.log.Timber
 
 fun ensureRequiredPermissions(
@@ -29,6 +27,7 @@ fun ensureRequiredPermissions(
 
                 if (it.isEmpty()) {
                     Timber.v("All required permissions granted.")
+                    // indicates that no further permissions will be requested
                     return true
 
                 } else {
@@ -36,11 +35,10 @@ fun ensureRequiredPermissions(
                     launch(
                         Intent(context, PermissionsActivity::class.java).apply {
                             action = INTENT_ACTION_PERMISSION_REQUEST
-                            addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                             putExtra(INTENT_EXTRA_KEY_PERMISSIONS, it.toTypedArray())
                         }
                     )
-                    // indicates, that permissions have to be requested and that the calling activity has to wait for the callback
+                    // indicates that permissions have to be requested and that the calling activity has to wait for the callback
                     return false
                 }
             }

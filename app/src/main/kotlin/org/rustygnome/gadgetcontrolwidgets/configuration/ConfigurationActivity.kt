@@ -5,16 +5,17 @@ import android.appwidget.AppWidgetManager
 import android.content.ComponentName
 import android.content.Intent
 import android.os.Bundle
+import android.view.View.GONE
 import android.view.View.VISIBLE
 import androidx.activity.result.ActivityResult
+import androidx.annotation.CallSuper
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import org.rustygnome.gadgetcontrolwidgets.App
 import org.rustygnome.gadgetcontrolwidgets.databinding.ConfigurationBinding
-import org.rustygnome.gadgetcontrolwidgets.ensureRequiredPermissions
 import org.rustygnome.gadgetcontrolwidgets.permissions.INTENT_EXTRA_KEY_PERMISSIONS
-import org.rustygnome.gadgetcontrolwidgets.widget.bluetooth.BluetoothModel
+import org.rustygnome.gadgetcontrolwidgets.permissions.ensureRequiredPermissions
 import org.rustygnome.gadgetcontrolwidgets.widget.bluetooth.Provider
 import timber.log.Timber
 
@@ -25,8 +26,14 @@ abstract class ConfigurationActivity(
 ): AppCompatActivity() {
 
     private lateinit var binding: ConfigurationBinding
-    protected abstract var requiredPermissions: Array<String>
-    protected abstract fun onRequiredPermissionsGranted()
+    protected abstract val requiredPermissions: Array<String>
+
+    @CallSuper
+    protected open fun onRequiredPermissionsGranted() {
+        Timber.v("> onRequiredPermissionsGranted()")
+        binding.deniedPermissionsState.deniedPermissionsStateContainer.visibility = GONE
+        placeFragmentInContainer()
+    }
 
     init {
         Timber.d("> init()")
@@ -35,7 +42,7 @@ abstract class ConfigurationActivity(
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         App.initLogging()
-        Timber.v("> onCreate()");
+        Timber.v("> onCreate()")
 
         // Will cause the widget host to cancel out of the widget placement if the user presses the back button
         setResult(RESULT_CANCELED)
@@ -48,7 +55,7 @@ abstract class ConfigurationActivity(
             it.deniedPermissionsState.permissionsButtonOK.setOnClickListener { finish() }
         }
 
-        ensureRequiredPermissions()
+        registerForEnsureRequiredPermissionsResult()
     }
 
     override fun onPause() {
@@ -57,35 +64,35 @@ abstract class ConfigurationActivity(
         super.onPause()
     }
 
-    private fun ensureRequiredPermissions() {
-        if (ensureRequiredPermissions(this, requiredPermissions)
-            { result: ActivityResult ->
-                when (result.resultCode) {
-                    Activity.RESULT_OK -> {
-                        Timber.i("Required permissions are ensured.")
-                        onRequiredPermissionsGranted()
-                        placeFragmentInContainer()
-                    }
-
-                    else -> {
-                        result.data?.run {
-                            getStringArrayExtra(INTENT_EXTRA_KEY_PERMISSIONS).also {
-                                Timber.w("Required permissions are NOT ensured: ${it?.joinToString(", ")}")
-                                // TODO: visualize missing permissions
-                            }
-                        } ?: {
-                            Timber.w("Required permissions are NOT ensured.")
-                        }
-                        explainDeniedPermissionState()
-                    }
-                }
-            }
-        ) {
+    private fun registerForEnsureRequiredPermissionsResult() {
+        Timber.v("> registerForEnsureRequiredPermissionsResult()")
+        if (ensureRequiredPermissions(this, requiredPermissions, ::onEnsureRequiredPermissionsResult)) {
             Timber.v("All permissions required by fragment already granted.")
-            BluetoothModel.setup(this)
-            placeFragmentInContainer()
+            onRequiredPermissionsGranted()
         } else {
             Timber.v("Waiting for permissions required by fragment to get granted...")
+        }
+    }
+
+    private fun onEnsureRequiredPermissionsResult(result: ActivityResult) {
+        Timber.d("Received back a result from requesting required permissions: ${result.resultCode}")
+        when (result.resultCode) {
+            Activity.RESULT_OK -> {
+                Timber.i("Required permissions are ensured.")
+                onRequiredPermissionsGranted()
+            }
+
+            else -> {
+                result.data?.run {
+                    getStringArrayExtra(INTENT_EXTRA_KEY_PERMISSIONS).also {
+                        Timber.w("Required permissions are NOT ensured: ${it?.joinToString(", ")}")
+                        // TODO: visualize missing permissions
+                    }
+                } ?: {
+                    Timber.w("Required permissions are NOT ensured.")
+                }
+                onRequiredPermissionsDenied()
+            }
         }
     }
 
@@ -99,7 +106,7 @@ abstract class ConfigurationActivity(
         }
     }
 
-    private fun explainDeniedPermissionState() {
+    private fun onRequiredPermissionsDenied() {
         binding.deniedPermissionsState.deniedPermissionsStateContainer.visibility = VISIBLE
     }
 

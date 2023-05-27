@@ -33,7 +33,7 @@ class PermissionsActivity: AppCompatActivity() {
             } else {
                 Timber.i("Not granted, but required permissions: ${it.keys.joinToString(", ")}.")
                 setResult(RESULT_CANCELED, Intent().apply {
-                    putStringArrayListExtra(INTENT_EXTRA_KEY_PERMISSIONS, arrayListOf(*it.keys.toTypedArray()))
+                    putExtra(INTENT_EXTRA_KEY_PERMISSIONS, it.keys.toTypedArray())
                 })
                 binding.permissionsButtonGrant.visibility = GONE
                 binding.deniedPermissionsState.deniedPermissionsStateContainer.visibility = VISIBLE

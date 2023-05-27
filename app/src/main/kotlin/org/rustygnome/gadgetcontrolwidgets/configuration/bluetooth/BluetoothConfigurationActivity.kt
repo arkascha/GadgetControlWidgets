@@ -8,6 +8,7 @@ import org.rustygnome.gadgetcontrolwidgets.widget.bluetooth.BLUETOOTH_REQUIRED_P
 import org.rustygnome.gadgetcontrolwidgets.widget.bluetooth.BluetoothModel
 import org.rustygnome.gadgetcontrolwidgets.widget.bluetooth.Provider
 import org.rustygnome.gadgetcontrolwidgets.widget.bluetooth.ProviderCompactHorizontal
+import timber.log.Timber
 
 class HorizontalCompactBluetoothActivity: BluetoothConfigurationActivity(
     provider = ProviderCompactHorizontal::class.java,
@@ -35,8 +36,12 @@ abstract class BluetoothConfigurationActivity(
     fragmentTitle,
     fragment,
 ) {
-    override var requiredPermissions: Array<String> = BLUETOOTH_REQUIRED_PERMISSIONS
+    override val requiredPermissions: Array<String>
+        get() = BLUETOOTH_REQUIRED_PERMISSIONS
+
     override fun onRequiredPermissionsGranted() {
+        Timber.v("> onRequiredPermissionsGranted()")
         BluetoothModel.setup(this)
+        super.onRequiredPermissionsGranted()
     }
 }

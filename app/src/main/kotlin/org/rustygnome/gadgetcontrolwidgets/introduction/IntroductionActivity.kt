@@ -21,7 +21,7 @@ class IntroductionActivity: AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Timber.v("> onCreate()");
+        Timber.v("> onCreate()")
 
         binding = IntroductionBinding.inflate(layoutInflater)
         setContentView(binding.root)
